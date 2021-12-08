@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRecipes">
         <activity
-            android:name=".activity_recipe_home_page"
-            android:exported="false" />
-        <activity
             android:name=".RegisterPage"
             android:exported="false" />
         <activity

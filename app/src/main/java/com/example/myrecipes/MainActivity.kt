@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
@@ -18,7 +19,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 private const val RC_SIGN_IN = 9001
 
 class MainActivity : AppCompatActivity() {
-    private var auth : FirebaseAuth = FirebaseAuth.getInstance()
     private var googleSignInClient: GoogleSignInClient? = null
     private lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val username : String = findViewById<TextView>(R.id.email).text.toString().trim()
         Log.d("tag", password)
         Log.d("tag", username)
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
+        firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
             if (task.isSuccessful){
                 val intent = Intent(this, RecipeHomePage::class.java)
                 startActivity(intent)
