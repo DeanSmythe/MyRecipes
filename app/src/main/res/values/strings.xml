@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyRecipes</string>
+    <string name="test_db_button">Test database</string>
 </resources>

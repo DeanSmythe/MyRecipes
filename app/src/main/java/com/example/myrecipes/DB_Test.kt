@@ -31,7 +31,20 @@ fun writeToDB() {
         }
 }
 
+    fun readFromDB() {
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
 
+    }
+}
 
 
 //    // Create a new user with a first, middle, and last name
@@ -64,5 +77,5 @@ fun writeToDB() {
 //    .addOnFailureListener { exception ->
 //        Log.w(TAG, "Error getting documents.", exception)
 //    }
+//}
 
-}
