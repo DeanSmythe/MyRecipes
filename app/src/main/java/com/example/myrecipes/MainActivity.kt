@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         val myDB = DB_Test()
         myDB.readFromDB()
 
+      val ingredient = Ingredient()
+     ingredient.writeNewIngredient("flour", "plainflour", "grams", "")
     }
 
 
