@@ -16,22 +16,22 @@ tools:context=".MainActivity">
     app:title="      Log In"
     app:titleTextColor="#000000" />
 
-<EditText
+    <EditText
 
-    android:id="@+id/email"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/toolbar_login"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="60dp"
-    android:drawablePadding="10dp"
-    android:hint="Email"
-    android:inputType="textEmailAddress"
-    android:paddingBottom="20dp">
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:drawablePadding="10dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingBottom="20dp">
 
 
-</EditText>
+    </EditText>
 
 
 <EditText
@@ -73,8 +73,7 @@ tools:context=".MainActivity">
     android:textColor="#FFFFFF"
     android:textSize="20dp"
     android:textAllCaps="false"
-    android:background="#00008b"
-    android:enabled="false"/>
+    android:background="#00008b" />
 
     <Button
         android:id="@+id/btnRegisterView"

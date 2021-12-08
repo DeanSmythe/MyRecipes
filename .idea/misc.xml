@@ -9,7 +9,8 @@
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.21209016393442623" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28125" />
-        <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_recipe_home_page.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.165" />
       </map>
     </option>
   </component>
