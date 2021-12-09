@@ -26,4 +26,9 @@ data class Ingredient(
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
     }
+    fun getIngredient(id: String): Ingredient {
+        val ingredientsRef = db.collection("ingredients")
+        val stateQuery = ingredientsRef.whereEqualTo("id", id)
+
+    }
 }

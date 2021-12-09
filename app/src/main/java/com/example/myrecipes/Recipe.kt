@@ -33,4 +33,24 @@ data class Recipe(
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
     }
+
+    fun getRecipe(id: String): Recipe {
+        val recipesRef = db.collection("recipes")
+        val stateQuery = recipesRef.whereEqualTo("id", id)
+
+    }
+
+    fun getAllRecipes(): {
+        db.collection("recipes")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+                    return result
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
 }
