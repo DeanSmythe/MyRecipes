@@ -71,21 +71,9 @@ class RegisterUserTest {
         onView(withId(R.id.etRegisterPassword)).perform(typeText("978657"),
             pressImeActionButton())
 
-       intended(hasComponent(RecipeHomePage::class.java!!.name))
+        onView(withId(R.id.btnRegisterUser)).perform(click())
 
-        onView(withId(R.id.btnRegisterUser)).perform(click(),
-            pressImeActionButton())
-
-//        intended(allOf(
-//            hasComponent(hasShortClassName(".DisplayMessageActivity")),
-//            toPackage(com.example.myrecipes.PACKAGE_NAME),
-//            hasExtra(RegisterPage.EXTRA_MESSAGE,EMAIL)))
-
-        val activityScenarioRule = ActivityScenario.launch(RecipeHomePage::class.java)
-        onView(withId(R.id.tvCurrentUser)).check(matches((withText(EMAIL))))
-
-//        startActivity(Intent(this, RegisterPage::class.java))
-//        onView(withId(R.id.tvCurrentUser)).check(matches((withText("tester@tested.com"))))
+        onView(withText(EMAIL)).check(matches(isDisplayed()))
 
     }
 }
