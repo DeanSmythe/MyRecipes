@@ -9,20 +9,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val myDB : DB_Test = DB_Test()
-        myDB.writeToDB()
-
+        val myDb : UserDbHandler = UserDbHandler()
+        myDb.writeToDB()
     }
-
-    fun testRead(view : View) {
-        val myDB = DB_Test()
-        myDB.readFromDB()
-
-      val ingredient = Ingredient()
-     ingredient.writeNewIngredient("flour", "plainflour", "grams", "")
-    }
-
-
-
-
 }
