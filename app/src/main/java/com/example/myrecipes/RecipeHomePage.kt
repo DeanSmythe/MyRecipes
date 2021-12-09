@@ -8,7 +8,9 @@ import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
+public const val EXTRA_MESSAGE = "tester@tested.com";
 class RecipeHomePage : AppCompatActivity() {
+
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
