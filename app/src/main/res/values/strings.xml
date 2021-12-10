@@ -10,4 +10,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="toast">\"Please enter your email\"</string>
+
+    <string-array name="ingredients">
+        <item>Eggs</item>
+        <item>Flour</item>
+        <item>Milk</item>
+    </string-array>
 </resources>
