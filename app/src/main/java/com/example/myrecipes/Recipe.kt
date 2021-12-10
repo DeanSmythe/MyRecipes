@@ -5,6 +5,8 @@ import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 
 @IgnoreExtraProperties
 data class Recipe(
@@ -33,24 +35,12 @@ data class Recipe(
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
     }
-
-    fun getRecipe(id: String): Recipe {
-        val recipesRef = db.collection("recipes")
-        val stateQuery = recipesRef.whereEqualTo("id", id)
-
+    fun getRecipe(id: String): Recipe? {
+        val recipeRef = db.collection("recipes").document(id)
+        return recipeRef.get().result.toObject<Recipe>()
     }
 
-    fun getAllRecipes(): {
-        db.collection("recipes")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                    return result
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents: ", exception)
-            }
+    fun getAllRecipes(): List<Recipe> {
+        return db.collection("recipes").get().result.toObjects<Recipe>()
     }
 }
