@@ -8,16 +8,8 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.myrecipes.utils.FirebaseUtils
-import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import io.mockk.every
-import io.mockk.mockk
 import io.mockk.mockkStatic
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
