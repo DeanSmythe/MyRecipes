@@ -31,7 +31,7 @@ class IngredientItemAdapter (
             val picture = findViewById<ImageView>(R.id.ivIngredientItem)
             Picasso.with(context).load(currentIngrendient.picture).into(picture)
             val quantity = findViewById<TextView>(R.id.tvIngredientQuanitity)
-            quantity.setText("1")
+            quantity.setText(currentIngrendient.uom)
         }
     }
 
