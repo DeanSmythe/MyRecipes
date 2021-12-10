@@ -1,7 +1,8 @@
 package com.example.myrecipes
 
-import kotlinx.coroutines.*
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -25,7 +26,6 @@ class IngredientUnitTest {
     @Test
     fun readsIngredientTest() = runBlocking {
         val returnIngredient: Ingredient? = suspendGetIngredient(testName)
-
         assertNotEquals(null, returnIngredient)
         if (returnIngredient != null) {
             assertEquals(testName, returnIngredient.name)
@@ -41,7 +41,7 @@ class IngredientUnitTest {
         }
     }
 
-    private suspend fun suspendGetIngredient(testName: String): Ingredient? = coroutineScope{
-        async {Ingredient().getIngredientByName(testName)}.await()
+    private suspend fun suspendGetIngredient(testName: String): Ingredient? = coroutineScope {
+        async { Ingredient().getIngredientByName(testName) }.await()
     }
 }
