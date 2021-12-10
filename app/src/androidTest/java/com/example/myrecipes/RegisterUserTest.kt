@@ -1,44 +1,40 @@
 package com.example.myrecipes
 
-import android.app.PendingIntent.getActivity
+import android.app.LauncherActivity
 import android.content.Intent
-import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.provider.ContactsContract.Directory.PACKAGE_NAME
-import android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-import android.view.WindowManager.LayoutParams.TYPE_TOAST
-import androidx.core.content.ContextCompat.startActivity
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Root
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.matcher.ComponentNameMatchers.hasShortClassName
-import androidx.test.espresso.intent.matcher.IntentMatchers.*
-import androidx.test.espresso.matcher.RootMatchers.withDecorView
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.intent.matcher.IntentMatchers
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.annotations.PublicApi
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.ktx.Firebase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
-import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.not
-import org.hamcrest.Matcher
-import org.hamcrest.TypeSafeMatcher
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.Description
+import org.junit.experimental.results.ResultMatchers.isSuccessful
 import org.junit.runner.RunWith
 
-private const val EMAIL = "tester@tested.com"
+private const val EMAIL = "tester12@tested.com"
 private const val PACKAGE_NAME = "com.example.myrecipes"
 private const val EXTRA_MESSAGE = "tester@tested.com"
 
@@ -48,22 +44,16 @@ class RegisterUserTest {
 
 
     @get:Rule
-    val activityScenarioRule = ActivityScenarioRule(RegisterPage::class.java)
+        val activityScenarioRule = ActivityScenarioRule(RegisterPage::class.java)
 
-    @Before
-    fun setUp() {
-        Intents.init()
-    }
 
-    @After
-    fun tearDown() {
-        Intents.release()
-    }
 
     @Test
     fun useRegisterButton() {
-        mockkStatic(FirebaseAuth::class)
-        every { FirebaseAuth.getInstance() } returns mockk(relaxed = true)
+        Intents.init()
+
+        onView(withId(R.id.btnRegisterUser)).perform(click())
+        Thread.sleep(100)
 
         onView(withId(R.id.etRegisterUsername)).perform(typeText(EMAIL),
             pressImeActionButton())
@@ -71,9 +61,16 @@ class RegisterUserTest {
         onView(withId(R.id.etRegisterPassword)).perform(typeText("978657"),
             pressImeActionButton())
 
-        onView(withId(R.id.btnRegisterUser)).perform(click())
-
-        onView(withText(EMAIL)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnRegisterUser)).perform(click(),
+            pressImeActionButton())
+        Intents.intended(hasComponent(RecipeHomePage::class.java.name))
+        onView(withText("Logged in as: ")).check(matches(withId(R.id.tvCurrentUserTitle)))
+        Thread.sleep(500)
+        firebaseAuth.getCurrentUser()!!.delete()
+        Intents.release()
 
     }
 }
+
+
+
