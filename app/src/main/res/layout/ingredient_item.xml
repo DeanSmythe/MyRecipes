@@ -24,7 +24,7 @@
         android:text="Example"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cbDone"
+        app:layout_constraintEnd_toStartOf="@+id/tvIngredientQuanitity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,8 +35,19 @@
         android:text="Example"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvIngredientName"
+        app:layout_constraintStart_toEndOf="@+id/tvIngredientUom"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvIngredientUom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Example"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cbDone"
-        app:layout_constraintStart_toEndOf="@+id/tvIngredientName"
+        app:layout_constraintStart_toEndOf="@+id/tvIngredientQuanitity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

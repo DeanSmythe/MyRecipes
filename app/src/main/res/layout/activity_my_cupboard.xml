@@ -19,32 +19,35 @@
         android:id="@+id/etIngredientQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Ingredient Amount:"
+        android:hint="Enter Amount:"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAddIngredient"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAddIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDeleteIngredient" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinneruom" />
 
-    <Button
-        android:id="@+id/btnDeleteIngredient"
+    <Spinner
+        android:id="@+id/spinneruom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/etIngredientQuantity" />
+
 
     <Spinner
         android:id="@+id/spinnerIngredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/rvListOfIngredients"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toTopOf="@+id/etIngredientQuantity"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

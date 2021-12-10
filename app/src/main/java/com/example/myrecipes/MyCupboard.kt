@@ -27,8 +27,10 @@ class MyCupboard : AppCompatActivity() {
         addIngredients.setOnClickListener {
             val quantity = findViewById<EditText>(R.id.etIngredientQuantity).text.toString()
             val ingredient = findViewById<Spinner>(R.id.spinnerIngredients)
+            val ingredientUom = findViewById<Spinner>(R.id.spinneruom)
             if (quantity.isNotEmpty()) {
-                val ingredient = Ingredient(uom = quantity, name = ingredient.selectedItem.toString())
+                val ingredient = Ingredient(picture = "https://live.staticflickr.com/3241/3083459599_55d24a48f8.jpg",
+                    description = quantity,uom = ingredientUom.selectedItem.toString(), name = ingredient.selectedItem.toString())
                 ingredientAdapter.addIngredient(ingredient)
                 findViewById<EditText>(R.id.etIngredientQuantity).setText("")
             }
@@ -42,6 +44,14 @@ class MyCupboard : AppCompatActivity() {
             android.R.layout.simple_spinner_item
         ).also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = arrayAdapter}
+
+        val spinnerUom = findViewById<Spinner>(R.id.spinneruom)
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.uom,
+            android.R.layout.simple_spinner_item
+        ).also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerUom.adapter = arrayAdapter}
 
 
 
