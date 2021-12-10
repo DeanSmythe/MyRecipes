@@ -18,6 +18,9 @@
             android:name=".ImageUploader"
             android:exported="false" />
         <activity
+            android:name=".MyCupboard"
+            android:exported="false" />
+        <activity
             android:name=".RegisterPage"
             android:exported="false" />
         <activity
