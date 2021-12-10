@@ -55,7 +55,7 @@ class ImageUploader : AppCompatActivity() {
         if (result != null && result.resultCode == Activity.RESULT_OK) {
             resultUri = result.data
             if (resultUri !=null){
-                Picasso.
+//                Picasso.
             }
         }
     }
