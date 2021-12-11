@@ -2,12 +2,12 @@ package com.example.myrecipes
 
 import android.app.Activity
 import android.content.Intent
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 
 class ImageUploader : AppCompatActivity() {
@@ -16,8 +16,8 @@ class ImageUploader : AppCompatActivity() {
     private var imageNameEditText: EditText? = null
     private var uploadImageView: ImageView? = null
     private var uploadProgressBar: ProgressBar? = null
-    private var uploadTextView: TextView? = null
-    private var resultUri: Intent? = null
+    private var uploadsTextView: TextView? = null
+    private var resultUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,36 +26,36 @@ class ImageUploader : AppCompatActivity() {
         chooseButtonHandle()
         uploadButtonHandle()
         imageNameHandle()
-        uploadImageView?.findViewById<TextView>(R.id.uploads_text_view)
-        uploadProgressBar?.findViewById<ProgressBar>(R.id.upload_progress_bar)
-        uploadTextView?.findViewById<TextView>(R.id.uploads_text_view)
+        uploadImageView = findViewById(R.id.uploadImageView)
+        uploadProgressBar = findViewById(R.id.uploadProgressBar)
+        uploadsTextView = findViewById(R.id.uploadsTextView)
     }
 
 
     private fun imageNameHandle() {
-        imageNameEditText?.findViewById<EditText>(R.id.image_name_edit_text)
-        imageNameEditText?.setOnClickListener {
-            openActivity()
-        }
+        imageNameEditText = findViewById(R.id.imageNameEditText)
     }
 
     private fun uploadButtonHandle() {
-        uploadImageButton?.findViewById<Button>(R.id.upload_image_button)
+        uploadImageButton = findViewById(R.id.uploadImageButton)
         uploadImageButton?.setOnClickListener {
+            Log.i("test:", "upload button clicked")
         }
     }
 
     private fun chooseButtonHandle() {
-        chooseImageButton?.findViewById<Button>(R.id.choose_image_button)
+        chooseImageButton = findViewById(R.id.chooseImageButton)
         chooseImageButton?.setOnClickListener {
+            Log.i("test:", "choose button clicked")
+            openActivity()
         }
     }
 
     private var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result != null && result.resultCode == Activity.RESULT_OK) {
-            resultUri = result.data
-            if (resultUri !=null){
-//                Picasso.
+            resultUri = result.data?.data
+            if (resultUri != null) {
+                Picasso.with(this).load(resultUri).into(uploadImageView)
             }
         }
     }

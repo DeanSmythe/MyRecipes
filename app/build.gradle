@@ -63,9 +63,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
-    implementation 'com.android.support.cardview-v7:26.1.0'
-    implementation 'com.android.support.recyclerview-v7:26.1.0'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 //     Declare the dependency for the Cloud Firestore library
 //     When using the BoM, you don't specify versions in Firebase library dependencies
 }

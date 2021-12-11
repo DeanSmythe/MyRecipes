@@ -1,16 +1,11 @@
 package com.example.myrecipes
 
-import android.graphics.BitmapFactory
-import android.media.Image
+import android.icu.number.NumberRangeFormatter.with
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
-import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
