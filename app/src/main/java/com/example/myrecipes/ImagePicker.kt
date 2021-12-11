@@ -13,8 +13,8 @@ class ImagePicker : AppCompatActivity() {
         setContentView(R.layout.activity_image_picker)
         imagesRecyclerView = findViewById(R.id.imagesRecyclerView)
         val images = mutableListOf<Image>(
-            Image("la", "tu"),
-            Image("test", "poo")
+            Image("la", "https://live.staticflickr.com/3241/3083459599_55d24a48f8.jpg"),
+            Image("test", "https://thumbs.dreamstime.com/b/flour-glass-bowl-wheat-isolated-white-36638830.jpg" )
         )
         imagesRecyclerView?.apply {
             adapter = ImagesAdapter(images)
