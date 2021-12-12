@@ -1,23 +1,21 @@
 package com.example.myrecipes
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
+import com.example.myrecipes.data.ImageDatabaseHandler
+import com.example.myrecipes.data.LocalRepository
 
 class ImageUploader : AppCompatActivity() {
+    private val localRepository: LocalRepository = LocalRepository()
     private var chooseImageButton: Button? = null
     private var uploadImageButton: Button? = null
     private var imageNameEditText: EditText? = null
-    private var uploadImageView: ImageView? = null
+    var uploadImageView: ImageView? = null
     private var uploadProgressBar: ProgressBar? = null
     private var uploadsTextView: TextView? = null
-    private var resultUri: Uri? = null
+    private val imagePickerNavigationHandler = ImagePickerNavigationHandler(this, localRepository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,23 +45,10 @@ class ImageUploader : AppCompatActivity() {
         chooseImageButton = findViewById(R.id.chooseImageButton)
         chooseImageButton?.setOnClickListener {
             Log.i("test:", "choose button clicked")
-            openActivity()
+            val imageDatabaseHandler = ImageDatabaseHandler(localRepository,imagePickerNavigationHandler)
+            imageDatabaseHandler.downloadImages()
+            Log.d("returned:", localRepository.images.toString())
         }
     }
 
-    private var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result != null && result.resultCode == Activity.RESULT_OK) {
-            resultUri = result.data?.data
-            if (resultUri != null) {
-                Picasso.with(this).load(resultUri).into(uploadImageView)
-            }
-        }
-    }
-
-    private fun openActivity() {
-        val intent = Intent(this, ImagePicker::class.java)
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_RESTRICTION_ENTRIES
-        launchSomeActivity.launch(intent)
-    }
 }

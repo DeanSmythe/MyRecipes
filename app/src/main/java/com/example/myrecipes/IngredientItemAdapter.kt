@@ -18,16 +18,16 @@ class IngredientItemAdapter (
     }
 
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
-        val currentIngrendient = ingredients[position]
+        val currentIngredient = ingredients[position]
         holder.itemView.apply {
             val ingredient = findViewById<TextView>(R.id.tvIngredientName)
-            ingredient.setText(currentIngrendient.name)
+            ingredient.setText(currentIngredient.name)
             val picture = findViewById<ImageView>(R.id.ivIngredientItem)
-            Picasso.with(context).load(currentIngrendient.picture).into(picture)
+            Picasso.with(context).load(currentIngredient.picture).into(picture)
             val uom = findViewById<TextView>(R.id.tvIngredientUom)
-            uom.setText(currentIngrendient.uom)
+            uom.text = currentIngredient.uom
             val quantity = findViewById<TextView>(R.id.tvIngredientQuanitity)
-            quantity.setText(currentIngrendient.description)
+            quantity.setText(currentIngredient.description)
 
         }
     }
