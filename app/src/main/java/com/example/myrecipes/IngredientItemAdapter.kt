@@ -21,13 +21,13 @@ class IngredientItemAdapter (
         val currentIngredient = ingredients[position]
         holder.itemView.apply {
             val ingredient = findViewById<TextView>(R.id.tvIngredientName)
-            ingredient.setText(currentIngredient.name)
+            ingredient.text = currentIngredient.name
             val picture = findViewById<ImageView>(R.id.ivIngredientItem)
             Picasso.with(context).load(currentIngredient.picture).into(picture)
             val uom = findViewById<TextView>(R.id.tvIngredientUom)
             uom.text = currentIngredient.uom
             val quantity = findViewById<TextView>(R.id.tvIngredientQuanitity)
-            quantity.setText(currentIngredient.description)
+            quantity.text = currentIngredient.description
 
         }
     }

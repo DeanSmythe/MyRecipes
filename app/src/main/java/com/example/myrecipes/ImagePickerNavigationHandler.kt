@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myrecipes.data.LocalRepository
 import com.squareup.picasso.Picasso
 
-class ImagePickerNavigationHandler(val imageUploader: ImageUploader, val localRepository: LocalRepository) {
+class ImagePickerNavigationHandler(private val imageUploader: ImageUploader, private val localRepository: LocalRepository) {
     private var resultUri: Uri? = null
     private var launchSomeActivity = imageUploader.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result != null && result.resultCode == Activity.RESULT_OK) {

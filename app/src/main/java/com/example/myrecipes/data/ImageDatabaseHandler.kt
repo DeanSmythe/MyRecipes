@@ -6,7 +6,7 @@ import com.example.myrecipes.ImagePickerNavigationHandler
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class ImageDatabaseHandler(val localRepository: LocalRepository, val imagePickerNavigationHandler: ImagePickerNavigationHandler) {
+class ImageDatabaseHandler(val localRepository: LocalRepository, private val imagePickerNavigationHandler: ImagePickerNavigationHandler) {
     private val db = Firebase.firestore
 
     fun uploadImage(imageName: String, imageUrl: String) {
