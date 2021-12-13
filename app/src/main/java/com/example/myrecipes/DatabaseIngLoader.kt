@@ -10,9 +10,10 @@ val db = Firebase.firestore
 class DatabaseIngLoader {
 
     fun loadDefaultIngToDb() {
-       val ingredient = Ingredient("Milk", "Semi-skimmed", "ml", "#")
-          val test1 =db.collection("ingredients")
-                  test1.add(ingredient)
+//       val ingredient = Ingredient("Milk", "Semi-skimmed", "ml", "#")
+          val test1 = db.collection("ingredients")
+          val ingMap = hashMapOf("name" to "Milk", "description" to "Semi-skimmed", "uom" to "ml", "Picture" to "#")
+                  test1.add(ingMap)
 //        db.collection("ingredients").add(ingredient)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
