@@ -1,6 +1,7 @@
-package com.example.myrecipes
+package com.example.myrecipes.com.example.myrecipes
 
-import android.util.Log
+import com.example.myrecipes.DatabaseIngLoader
+import com.example.myrecipes.Ingredient
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
@@ -13,7 +14,7 @@ class IngredientUnitTest {
     private val testName: String = "flour"
     private val testDescription: String = "plainflour"
     private val testUom: String = "grams"
-    private val testPicture: String = ""
+    private val testPicture: String = "#"
 
     @Test
     fun createsIngredientTest() {
@@ -25,8 +26,9 @@ class IngredientUnitTest {
     }
 
     @Test
-    fun manualTests() {
-        DatabaseIngLoader().loadDb()
+    fun manualTestLoadIng() {
+        DatabaseIngLoader().loadDefaultIngToDb()
+        Thread.sleep(500)
     }
 
     @Test

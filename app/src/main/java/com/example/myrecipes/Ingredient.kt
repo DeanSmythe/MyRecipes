@@ -17,6 +17,8 @@ data class Ingredient(
 ) {
 
     private val db = Firebase.firestore
+
+
     var id: String = ""
         get() {
             return field
@@ -29,7 +31,8 @@ data class Ingredient(
         picture: String
     ): String {
         val ingredient = Ingredient(name, description, uom, picture)
-        id = db.collection("ingredients").add(ingredient)
+        val ingredientData = hashMapOf(ingredient.name to "name", ingredient.description to "description", ingredient.uom to "uom", ingredient.picture to "picture")
+        id = db.collection("ingredients").add(ingredientData)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
             }
@@ -41,7 +44,8 @@ data class Ingredient(
     }
 
     fun writeIngredient(ingredient: Ingredient) : String {
-        id = db.collection("ingredients").add(ingredient)
+        val ingredientData = hashMapOf(ingredient.name to "name", ingredient.description to "description", ingredient.uom to "uom", ingredient.picture to "picture")
+        id = db.collection("ingredients").add(ingredientData)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
             }
@@ -81,5 +85,6 @@ data class Ingredient(
     fun getAllIngredients(): List<Ingredient> {
         return db.collection("ingredients").get().result.toObjects<Ingredient>()
     }
+
 
 }

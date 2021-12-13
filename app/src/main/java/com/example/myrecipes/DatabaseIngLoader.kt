@@ -9,14 +9,17 @@ val db = Firebase.firestore
 
 class DatabaseIngLoader {
 
-    fun loadDb() {
-        var newRef = Ingredient().writeNewIngredient("Flour", "Plain flour", "grams", "")
-        newRef = Ingredient().writeNewIngredient("Milk", "Plain flour", "grams", "")
-        newRef = Ingredient().writeNewIngredient("Egg", "Medium egg", "each", "")
-        newRef = Ingredient().writeNewIngredient("Butter", "Unsalted", "grams", "")
-        newRef = Ingredient().writeNewIngredient("SR Flour", "Self Raising flour", "grams", "")
-        newRef = Ingredient().writeNewIngredient("Rice", "Brown rice", "grams", "")
-
+    fun loadDefaultIngToDb() {
+       val ingredient = Ingredient("Milk", "Semi-skimmed", "ml", "#")
+          val test1 =db.collection("ingredients")
+                  test1.add(ingredient)
+//        db.collection("ingredients").add(ingredient)
+            .addOnSuccessListener { documentReference ->
+                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { error ->
+                Log.w(ContentValues.TAG, "Error adding document", error)
+            }
     }
 
     fun emptyIngredients() {
