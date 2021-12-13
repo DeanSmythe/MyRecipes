@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCCCC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="My Cupboard"
+        app:titleTextColor="#000000" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListOfIngredients"
         android:layout_width="match_parent"
@@ -13,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnAddIngredient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_login" />
 
     <EditText
         android:id="@+id/etIngredientQuantity"
