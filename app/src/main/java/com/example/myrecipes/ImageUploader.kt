@@ -38,6 +38,8 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         uploadImageButton = findViewById(R.id.uploadImageButton)
         uploadImageButton?.setOnClickListener {
             Log.i("test:", "upload button clicked")
+            val imageDatabaseHandler= ImageDatabaseHandler(localRepository,imageUploaderNavigationHandler,this)
+            imageDatabaseHandler.uploadImage("test","https://live.staticflickr.com/3241/3083459599_55d24a48f8.jpg")
         }
     }
 
