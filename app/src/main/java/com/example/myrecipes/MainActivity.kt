@@ -19,33 +19,36 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar_login)
         setSupportActionBar(toolbar)
 
-        DatabaseIngLoader().loadDefaultIngToDb()
 
-//        val registerButton = findViewById<Button>(R.id.btnRegisterView)
-//        registerButton.setOnClickListener {
-//            val intent = Intent(this, RegisterPage::class.java)
-//            startActivity(intent)
-//        }
+        val registerButton = findViewById<Button>(R.id.btnRegisterView)
+        registerButton.setOnClickListener {
+            val intent = Intent(this, RegisterPage::class.java)
+            startActivity(intent)
+        }
 
-//        val loginButton = findViewById<Button>(R.id.login_button)
-//        loginButton.setOnClickListener {
-//            signIn()
-//        }
+        val loginButton = findViewById<Button>(R.id.login_button)
+        loginButton.setOnClickListener {
+            signIn()
+        }
+
     }
 
-//    private fun signIn(){
-//        val password : String = findViewById<TextView>(R.id.password).text.toString().trim()
-//        val username : String = findViewById<TextView>(R.id.email).text.toString().trim()
-//        Log.d("tag", password)
-//        Log.d("tag", username)
-//        firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
-//            if (task.isSuccessful){
-//                val intent = Intent(this, RecipeHomePage::class.java)
-//                startActivity(intent)
-//                finish()
-//            }else{
-//                Toast.makeText(this@MainActivity,"Sign-In Incorrect", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    }
+    private fun signIn(){
+        val password : String = findViewById<TextView>(R.id.password).text.toString().trim()
+        val username : String = findViewById<TextView>(R.id.email).text.toString().trim()
+        Log.d("tag", password)
+        Log.d("tag", username)
+        firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                val intent = Intent(this, RecipeHomePage::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(this@MainActivity,"Sign-In Incorrect", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+
 }

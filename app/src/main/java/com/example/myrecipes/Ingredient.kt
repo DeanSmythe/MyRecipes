@@ -12,12 +12,11 @@ import com.google.firebase.firestore.ktx.toObjects
 data class Ingredient(
     var name: String? = null,
     var description: String? = null,
-    var uom: String? = null,
+    var uom: UnitOfMeasure? = null,
     var picture: String? = null
 ) {
 
     private val db = Firebase.firestore
-
 
     var id: String = ""
         get() {
@@ -27,11 +26,11 @@ data class Ingredient(
     fun writeNewIngredient(
         name: String,
         description: String,
-        uom: String,
+        uom: UnitOfMeasure,
         picture: String
     ): String {
         val ingredient = Ingredient(name, description, uom, picture)
-        val ingredientData = hashMapOf(ingredient.name to "name", ingredient.description to "description", ingredient.uom to "uom", ingredient.picture to "picture")
+        val ingredientData = hashMapOf("name" to ingredient.name,"description" to ingredient.description, "uom" to ingredient.uom.toString(), "picture" to ingredient.picture)
         id = db.collection("ingredients").add(ingredientData)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
@@ -40,17 +39,17 @@ data class Ingredient(
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
             .result.toString()
-        return id.toString()
+        return@writeNewIngredient id
     }
 
     fun writeIngredient(ingredient: Ingredient) : String {
-        val ingredientData = hashMapOf(ingredient.name to "name", ingredient.description to "description", ingredient.uom to "uom", ingredient.picture to "picture")
+        val ingredientData = hashMapOf("name" to ingredient.name,"description" to ingredient.description, "uom" to ingredient.uom, "picture" to ingredient.picture)
         id = db.collection("ingredients").add(ingredientData)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
             }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
+            .addOnFailureListener { error ->
+                Log.w(ContentValues.TAG, "Error adding document", error)
             }
             .result.toString()
         return id.toString()

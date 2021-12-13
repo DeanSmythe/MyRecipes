@@ -2,9 +2,7 @@ package com.example.myrecipes.com.example.myrecipes
 
 import com.example.myrecipes.DatabaseIngLoader
 import com.example.myrecipes.Ingredient
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -28,12 +26,11 @@ class IngredientUnitTest {
     @Test
     fun manualTestLoadIng() {
         DatabaseIngLoader().loadDefaultIngToDb()
-        Thread.sleep(500)
     }
 
     @Test
-    fun emptiesIngredients() {
-        DatabaseIngLoader().emptyIngredients()
+    fun emptiesIngredients(): Unit = runBlocking {
+         DatabaseIngLoader().emptyIngredients()
     }
 
     @Test
@@ -55,9 +52,7 @@ class IngredientUnitTest {
         }
     }
 
-    private suspend fun suspendGetIngredient(testName: String): Ingredient? = coroutineScope {
-        async { Ingredient().getIngredientByName(testName) }.await()
-    }
-
-
+     suspend fun suspendGetIngredient(testName: String) = coroutineScope {
+           async { Ingredient().getIngredientByName(testName) }.await()
+         }
 }

@@ -67,7 +67,9 @@ class MyCupboard : AppCompatActivity() {
             val ingredientUom = findViewById<Spinner>(R.id.spinneruom)
             if (quantity.isNotEmpty()) {
                 val ingredient = Ingredient(picture = findImage(ingredient= ingredient) ,
-                    description = quantity,uom = ingredientUom.selectedItem.toString(), name = ingredient.selectedItem.toString())
+                    description = quantity, uom = UnitOfMeasure.GRAMS, name = ingredient.selectedItem.toString())
+//           TODO   INCOMPLETE!!!!!!
+//                  description = quantity, uom = ingredientUom.selectedItem.toString(), name = ingredient.selectedItem.toString())
                 ingredientAdapter.addIngredient(ingredient)
                 findViewById<EditText>(R.id.etIngredientQuantity).setText("")
             }
