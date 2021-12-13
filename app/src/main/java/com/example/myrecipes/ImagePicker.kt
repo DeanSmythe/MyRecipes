@@ -1,5 +1,6 @@
 package com.example.myrecipes
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,7 @@ class ImagePicker : AppCompatActivity(),ActivityNavigationHandler {
         val returnIntent = Intent(this, ImageUploader::class.java)
         returnIntent.putExtra("returnLocalRepository", localRepository)
         setResult(RESULT_OK, returnIntent)
-        finish()
+        (this as Activity).finish()
     }
 
 }
