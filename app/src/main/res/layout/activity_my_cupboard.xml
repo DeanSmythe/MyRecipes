@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/chopboard"
+    >
 
     <androidx.appcompat.widget.Toolbar
 
@@ -40,6 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Enter Amount:"
+            android:background="#9C27B0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -58,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
+            android:background="#9C27B0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/etIngredientQuantity" />
 
@@ -67,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
+            android:background="#9C27B0"
             app:layout_constraintBottom_toTopOf="@+id/etIngredientQuantity"
             app:layout_constraintStart_toStartOf="parent" />
 
