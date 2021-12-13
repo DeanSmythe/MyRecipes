@@ -50,8 +50,7 @@ class MyCupboard : AppCompatActivity() {
     private fun findImage(ingredient: Spinner) : String?{
         val map = mapOf("http://clipart-library.com/img/1640487.png" to "Eggs",
             "https://mpng.subpng.com/20180212/wyq/kisspng-wheat-flour-bread-flour-powder-bowl-of-white-flour-5a81d582143ae9.8859969215184582420829.jpg" to "Flour",
-            "https://www.citypng.com/public/uploads/preview/hd-real-milk-glass-bottle-png-31625339912cg70iul2hg.png" to "Milk"
-        )
+            "https://www.citypng.com/public/uploads/preview/hd-real-milk-glass-bottle-png-31625339912cg70iul2hg.png" to "Milk")
         return map.entries.find { it.value == ingredient.selectedItem.toString()}?.key
     }
 
