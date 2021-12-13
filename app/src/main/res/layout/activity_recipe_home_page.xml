@@ -15,6 +15,14 @@
         android:backgroundTint="#CCCCCC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/food1"
+        android:adjustViewBounds="true"
+        />
     <TextView
         android:id="@+id/tvCurrentUser"
         android:textColor="@color/black"
