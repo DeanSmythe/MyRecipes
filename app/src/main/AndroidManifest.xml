@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRecipes">
         <activity
+            android:name=".MyCupboard"
+            android:exported="false" />
+        <activity
             android:name=".RegisterPage"
             android:exported="false" />
         <activity

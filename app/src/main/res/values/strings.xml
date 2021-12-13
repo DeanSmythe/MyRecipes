@@ -9,4 +9,24 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="toast">\"Please enter your email\"</string>
+
+    <string-array name="ingredients">
+        <item>Eggs</item>
+        <item>Flour</item>
+        <item>Milk</item>
+    </string-array>
+
+    <string-array name="uom">
+        <item>each</item>
+        <item>of</item>
+        <item>grams</item>
+        <item>ml</item>
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>pint</item>
+        <item>lb</item>
+        <item>oz</item>
+        <item>fl.oz</item>
+    </string-array>
 </resources>
