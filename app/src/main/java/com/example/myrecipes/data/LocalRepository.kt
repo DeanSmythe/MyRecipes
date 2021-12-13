@@ -16,13 +16,4 @@ data class LocalRepository constructor(
     fun saveCurrentImage(image: Image) {
         currentImage = image
     }
-
-
-    //recipe table
-
-    //ingredients
-
-    //cupboard
-
-
 }

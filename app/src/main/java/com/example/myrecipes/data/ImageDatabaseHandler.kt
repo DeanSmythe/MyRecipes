@@ -12,6 +12,14 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
 
     fun uploadImage(imageName: String, imageUrl: String) {
         val image = Image(imageName, imageUrl)
+        executeUploadRequest(image)
+    }
+
+    fun uploadImage(image:Image){
+        executeUploadRequest(image)
+    }
+
+    private fun executeUploadRequest(image: Image) {
         db.collection("images").add(image)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "Added Image ID: ${documentReference.id}")
@@ -33,8 +41,8 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
                     val imageUrl = document.data["imageUrl"].toString()
                     val image = Image(imageName, imageUrl)
                     localRepository.addImage(image)
-                    imagePickerNavigationHandler.openActivity()
                 }
+                imagePickerNavigationHandler.openActivity()
             }
             .addOnFailureListener { error ->
                 Log.w(ContentValues.TAG, "Error reading document", error)

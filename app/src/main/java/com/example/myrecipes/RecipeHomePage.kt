@@ -21,7 +21,7 @@ class RecipeHomePage : AppCompatActivity() {
         val myCupboard = findViewById<Button>(R.id.btnMyCupboard)
 
         myCupboard.setOnClickListener {
-            val intent = Intent(this, MyCupboard::class.java)
+            val intent = Intent(this, ImageUploader::class.java)
             startActivity(intent)
 
         }
