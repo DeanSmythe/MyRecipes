@@ -37,7 +37,6 @@ class IngredientItemAdapter (
         notifyItemInserted(ingredients.size - 1)
     }
 
-
     override fun getItemCount(): Int {
         return ingredients.size
     }

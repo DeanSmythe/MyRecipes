@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myrecipes.data.ImageDatabaseHandler
 import com.example.myrecipes.data.LocalRepository
 
-class ImageUploader : AppCompatActivity() {
+class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     private val localRepository: LocalRepository = LocalRepository()
     private var chooseImageButton: Button? = null
     private var uploadImageButton: Button? = null
@@ -15,7 +15,7 @@ class ImageUploader : AppCompatActivity() {
     var uploadImageView: ImageView? = null
     private var uploadProgressBar: ProgressBar? = null
     private var uploadsTextView: TextView? = null
-    private val imagePickerNavigationHandler = ImagePickerNavigationHandler(this, localRepository)
+    private val imageUploaderNavigationHandler = ImageUploaderNavigationHandler(this, localRepository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +45,18 @@ class ImageUploader : AppCompatActivity() {
         chooseImageButton = findViewById(R.id.chooseImageButton)
         chooseImageButton?.setOnClickListener {
             Log.i("test:", "choose button clicked")
-            val imageDatabaseHandler = ImageDatabaseHandler(localRepository,imagePickerNavigationHandler)
+            val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
             imageDatabaseHandler.downloadImages()
             Log.d("returned:", localRepository.images.toString())
         }
+    }
+
+    override fun openActivity() {
+        imageUploaderNavigationHandler.openActivity()
+    }
+
+    override fun finishActivity() {
+        imageUploaderNavigationHandler.finishActivity()
     }
 
 }

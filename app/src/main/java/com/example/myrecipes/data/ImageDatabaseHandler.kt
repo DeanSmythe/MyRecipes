@@ -2,11 +2,12 @@ package com.example.myrecipes.data
 
 import android.content.ContentValues
 import android.util.Log
-import com.example.myrecipes.ImagePickerNavigationHandler
+import com.example.myrecipes.ImageUploaderNavigationHandler
+import com.example.myrecipes.ImageUploader
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class ImageDatabaseHandler(val localRepository: LocalRepository, private val imagePickerNavigationHandler: ImagePickerNavigationHandler) {
+class ImageDatabaseHandler(val localRepository: LocalRepository, private val imagePickerNavigationHandler: ImageUploaderNavigationHandler, private val imageUploader: ImageUploader) {
     private val db = Firebase.firestore
 
     fun uploadImage(imageName: String, imageUrl: String) {
