@@ -1,5 +1,6 @@
 package com.example.myrecipes
 
+import android.util.Log
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.runBlocking
@@ -24,8 +25,19 @@ class IngredientUnitTest {
     }
 
     @Test
+    fun manualTests() {
+        DatabaseIngLoader().loadDb()
+    }
+
+    @Test
+    fun emptiesIngredients() {
+        DatabaseIngLoader().emptyIngredients()
+    }
+
+    @Test
     fun readsIngredientTest() = runBlocking {
         val returnIngredient: Ingredient? = suspendGetIngredient(testName)
+        Thread.sleep(550)
         assertNotEquals(null, returnIngredient)
         if (returnIngredient != null) {
             assertEquals(testName, returnIngredient.name)
@@ -44,4 +56,6 @@ class IngredientUnitTest {
     private suspend fun suspendGetIngredient(testName: String): Ingredient? = coroutineScope {
         async { Ingredient().getIngredientByName(testName) }.await()
     }
+
+
 }

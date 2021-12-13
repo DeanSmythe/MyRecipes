@@ -40,6 +40,18 @@ data class Ingredient(
         return id.toString()
     }
 
+    fun writeIngredient(ingredient: Ingredient) : String {
+        id = db.collection("ingredients").add(ingredient)
+            .addOnSuccessListener { documentReference ->
+                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding document", e)
+            }
+            .result.toString()
+        return id.toString()
+    }
+
     fun updateIngredient(ingredient: Ingredient) {
         db.collection("ingredients").document(ingredient.id)
             .update(

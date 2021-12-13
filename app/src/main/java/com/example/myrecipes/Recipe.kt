@@ -15,7 +15,8 @@ data class Recipe(
     val description: String? = null,
     val timetomake: Int? = null,
     val picture: String? = null,
-    val rating: Int? = null
+    val rating: Int? = null,
+    val diet: Enum<Diet> = Diet.NONE
 ) {
 
     private val db = Firebase.firestore
@@ -29,10 +30,11 @@ data class Recipe(
         description: String,
         timetomake: Int,
         picture: String,
-        rating: Int
+        rating: Int,
+        diet: Enum<Diet>
     ): String {
 
-        val recipe = Recipe(name, description, timetomake, picture, rating)
+        val recipe = Recipe(name, description, timetomake, picture, rating, diet)
         id = db.collection("recipes").add(recipe)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
@@ -78,5 +80,10 @@ data class Recipe(
     fun getRecipesByRating(rating: Int): List<Recipe> {
         val recipesOverRating = db.collection("recipes").whereGreaterThanOrEqualTo("Rating", rating)
         return recipesOverRating.get().result.toObjects<Recipe>()
+    }
+
+    fun getRecipesByDiet(diet: Enum<Diet>): List<Recipe> {
+        val recipesMatch = db.collection("recipes").whereEqualTo("Diet", diet)
+        return recipesMatch.get().result.toObjects<Recipe>()
     }
 }
