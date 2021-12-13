@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/password.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/activity_my_cupboard.xml" value="0.2269021739130435" />
-        <entry key="app/src/main/res/layout/activity_recipe_home_page.xml" value="0.18385416666666668" />
-        <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/ingredient_item.xml" value="0.2269021739130435" />
+        <entry key="app/src/main/res/drawable-v24/message.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/drawable/ic_person_icon.xml" value="0.228125" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.2182061579651941" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_register_page.xml" value="0.2182061579651941" />
+        <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.21209016393442623" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/activity_my_cupboard.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/activity_recipe_home_page.xml" value="0.2375" />
+        <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/ingredient_item.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/menu/account_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
