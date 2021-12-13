@@ -1,17 +1,15 @@
 package com.example.myrecipes
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myrecipes.utils.FirebaseUtils
-import java.lang.Exception
+
 
 
 class MyCupboard : AppCompatActivity() {
@@ -22,7 +20,6 @@ class MyCupboard : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_cupboard)
-        setSupportActionBar(findViewById(R.id.toolbar_login))
         ingredientAdapter = IngredientItemAdapter(mutableListOf())
 
         setUpRecyclerAndCards()
@@ -32,23 +29,6 @@ class MyCupboard : AppCompatActivity() {
 
         setSpinnerAdapter(spinner,spinnerUom)
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.account_menu,menu)
-        var currentUser = menu?.findItem(R.id.itmLoggedInAs)
-        currentUser?.setTitle(setUsername())
-        var recipePage = menu?.findItem(R.id.itmMyCupboard)
-        recipePage?.setTitle("Recipe page")
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.itmLogout -> signOut()
-            R.id.itmMyCupboard -> recipePage()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun setSpinnerAdapter(spinner: Spinner, spinnerUom: Spinner){
@@ -68,9 +48,9 @@ class MyCupboard : AppCompatActivity() {
     }
 
     private fun findImage(ingredient: Spinner) : String?{
-        val map = mapOf("https://live.staticflickr.com/3241/3083459599_55d24a48f8.jpg" to "Eggs",
-            "https://thumbs.dreamstime.com/b/flour-glass-bowl-wheat-isolated-white-36638830.jpg" to "Flour",
-            "https://static7.depositphotos.com/1001069/716/i/600/depositphotos_7169901-stock-photo-milk-bottle.jpg" to "Milk"
+        val map = mapOf("http://clipart-library.com/img/1640487.png" to "Eggs",
+            "https://mpng.subpng.com/20180212/wyq/kisspng-wheat-flour-bread-flour-powder-bowl-of-white-flour-5a81d582143ae9.8859969215184582420829.jpg" to "Flour",
+            "https://www.citypng.com/public/uploads/preview/hd-real-milk-glass-bottle-png-31625339912cg70iul2hg.png" to "Milk"
         )
         return map.entries.find { it.value == ingredient.selectedItem.toString()}?.key
     }
@@ -92,31 +72,5 @@ class MyCupboard : AppCompatActivity() {
                 findViewById<EditText>(R.id.etIngredientQuantity).setText("")
             }
         }
-    }
-
-    private fun setUsername(): String {
-        val user = FirebaseUtils.firebaseAuth.currentUser?.email
-        if (user != null) {
-            Log.d("tag", user)
-            val username = user
-            return "Signed in as: "+user
-        }
-        return "Error finding user"
-    }
-
-    private fun signOut(){
-        try {
-            FirebaseUtils.firebaseAuth.signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        } catch(e: Exception){
-            Toast.makeText(this@MyCupboard,"Sign out Error", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
-    private fun recipePage(){
-        val intent = Intent(this, RecipeHomePage::class.java)
-        startActivity(intent)
     }
 }
