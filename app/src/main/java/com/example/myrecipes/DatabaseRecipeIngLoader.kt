@@ -34,7 +34,7 @@ class DatabaseRecipeIngLoader {
             .addOnFailureListener{ error ->
             Log.w(ContentValues.TAG, "Error adding document", error)
         }
-            .result.toString()
+//            .result.toString()
 
         db.collection("recipe_ingredients").add(recipeData2)
             .addOnSuccessListener{ documentReference ->
