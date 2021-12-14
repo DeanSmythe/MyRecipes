@@ -9,7 +9,6 @@ import com.example.myrecipes.data.Image
 import com.example.myrecipes.data.ImageDatabaseHandler
 import com.example.myrecipes.data.LocalRepository
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_image_uploader.*
 
 class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     private val localRepository: LocalRepository = LocalRepository()
@@ -18,6 +17,7 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     private var uploadImageButton: Button? = null
     private var downloadImageButton: Button? = null
     private var imageNameEditText: EditText? = null
+    private var imageUrlEditText: EditText? = null
     var uploadImageView: ImageView? = null
     private var uploadProgressBar: ProgressBar? = null
     private var uploadsTextView: TextView? = null
@@ -31,16 +31,20 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         chooseLocalButtonHandle()
         downloadButtonHandle()
         uploadButtonHandle()
-        imageNameHandle()
-
+        imageNameEditHandle()
+        imageUrlEditHandle()
         uploadImageView = findViewById(R.id.uploadImageView)
-        uploadProgressBar = findViewById(R.id.uploadProgressBar)
+        uploadProgressBar = findViewById(R.id.transferProgressBar)
         uploadsTextView = findViewById(R.id.uploadsTextView)
     }
 
 
-    private fun imageNameHandle() {
+    private fun imageNameEditHandle() {
         imageNameEditText = findViewById(R.id.imageNameEditText)
+    }
+
+    private fun imageUrlEditHandle() {
+        imageUrlEditText = findViewById(R.id.imageUrlEditText)
     }
 
     private fun chooseButtonHandle() {
@@ -49,7 +53,6 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
             Log.i("test:", "choose image button clicked")
             val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
             imageDatabaseHandler.downloadImages()
-            Log.d("returned:", localRepository.images.toString())
         }
     }
 
@@ -65,8 +68,8 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         uploadImageButton = findViewById(R.id.uploadImageButton)
         uploadImageButton?.setOnClickListener {
             Log.i("test:", "upload image button clicked")
-            val image=Image("NewImageTest","Screenshot 2021-12-10 at 08.27.00.png")
-            val imageDatabaseHandler=ImageDatabaseHandler(localRepository,imageUploaderNavigationHandler,this)
+            val image = Image(imageNameEditText.toString(), imageUrlEditText.toString())
+            val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
             imageDatabaseHandler.uploadImage(image)
         }
     }
@@ -76,11 +79,28 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         downloadImageButton?.setOnClickListener {
             Log.i("test:", "download image button clicked")
 
-            val imageStorageHandler = ImageStorageHandler(this)
-            imageStorageHandler.getImage("Screenshot 2021-12-10 at 08.27.00.png")
+            val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
+            val imageName = imageNameEditText.toString()
+            if (!imageName.isNotBlank()) {
+                imageDatabaseHandler.findUrl(imageName)
+            }
         }
     }
 
+    fun displayImage(imageUrl: Uri) {
+        Picasso.with(this).load(imageUrl).into(uploadImageView)
+    }
+
+    fun resultedUrl(image: Image) {
+        val imageStorageHandler = ImageStorageHandler(this)
+        image.imageUrl?.let { imageStorageHandler.getImage(it) }
+    }
+
+    fun displayChosenImage(currentImage: Image) {
+        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
+        imageNameEditText?.setText(currentImage.imageName,TextView.BufferType.EDITABLE)
+        imageUrlEditText?.setText(currentImage.imageUrl,TextView.BufferType.EDITABLE)
+    }
     override fun openActivity() {
         imageUploaderNavigationHandler.openActivity()
     }
@@ -89,7 +109,6 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         imageUploaderNavigationHandler.finishActivity()
     }
 
-    fun displayImage(imageUrl: Uri) {
-        Picasso.with(this).load(imageUrl).into(uploadImageView)
-    }
+
+
 }

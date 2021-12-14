@@ -1,21 +1,18 @@
 package com.example.myrecipes.data
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.myrecipes.ImageUploaderNavigationHandler
 import com.example.myrecipes.ImageUploader
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class ImageDatabaseHandler(val localRepository: LocalRepository, private val imagePickerNavigationHandler: ImageUploaderNavigationHandler, private val imageUploader: ImageUploader) {
     private val db = Firebase.firestore
 
-    fun uploadImage(imageName: String, imageUrl: String) {
-        val image = Image(imageName, imageUrl)
-        executeUploadRequest(image)
-    }
-
-    fun uploadImage(image:Image){
+    fun uploadImage(image: Image) {
         executeUploadRequest(image)
     }
 
@@ -37,9 +34,7 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
                     Log.d(ContentValues.TAG, "NAME: ${document.data["imageName"].toString()}")
                     Log.d(ContentValues.TAG, "URL: ${document.data["imageUrl"].toString()}")
 
-                    val imageName = document.data["imageName"].toString()
-                    val imageUrl = document.data["imageUrl"].toString()
-                    val image = Image(imageName, imageUrl)
+                    val image = packetiseImage(document)
                     localRepository.addImage(image)
                 }
                 imagePickerNavigationHandler.openActivity()
@@ -47,5 +42,32 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
             .addOnFailureListener { error ->
                 Log.w(ContentValues.TAG, "Error reading document", error)
             }
+    }
+
+    private fun packetiseImage(document: QueryDocumentSnapshot): Image {
+        val imageName = document.data["imageName"].toString()
+        val imageUrl = document.data["imageUrl"].toString()
+        val image = Image(imageName, imageUrl)
+        return image
+    }
+
+    fun findUrl(imageName: String) {
+        val images = mutableListOf<Image>()
+        db.collection("imagess")
+            .whereEqualTo("imageName", imageName)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d(TAG, "${document.id} => ${document.data}")
+
+                    val image = packetiseImage(document)
+                    images.add(image)
+                }
+                imageUploader.resultedUrl(images.first())
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+
     }
 }
