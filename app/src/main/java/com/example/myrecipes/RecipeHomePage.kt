@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
+import com.example.myrecipes.utils.RecipeAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -24,12 +25,22 @@ import java.lang.Exception
 class RecipeHomePage : AppCompatActivity() {
 
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+    private val img = arrayOf(R.drawable.burger,R.drawable.pizza,R.drawable.pancakes,
+        R.drawable.frenchtoast,R.drawable.meatballs, R.drawable.tacos,R.drawable.tomato_mozerella)
+    private val texts = arrayOf("Charbroiled Steak Burger", "Pizza Milano", "Breakfast Pancakes", "French Toast",
+        "Italian Style Meatballs", "Chick Pea Tacos", "Tomato and Mozzarella Salad")
+    private val descs = arrayOf("Delicious chuck steak burger", "Adjust toppings to suit your diet", "A Sunday morning treat",
+    "Breakfast doesn't get any better", "Serve with a pasta of your choice", "Great vegetarian option", "Healthy option for those on a diet")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_home_page)
         setSupportActionBar(findViewById(R.id.toolbar))
         setUsername()
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_recipe)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RecipeAdapter(img,texts,descs)
 
     }
 
