@@ -1,5 +1,6 @@
 package com.example.myrecipes
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myrecipes.utils.FirebaseUtils
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
 
@@ -67,12 +70,12 @@ class MyCupboard : AppCompatActivity() {
             spinnerUom.adapter = arrayAdapter}
     }
 
-    private fun findImage(ingredient: Spinner) : String?{
+    private fun findImage(ingredient: String) : String?{
         val map = mapOf("http://clipart-library.com/img/1640487.png" to "Eggs",
             "http://clipart-library.com/img/1942265.png" to "Flour",
             "http://clipart-library.com/images_k/cup-transparent-background/cup-transparent-background-10.jpg" to "Milk"
         )
-        return map.entries.find { it.value == ingredient.selectedItem.toString()}?.key
+        return map.entries.find { it.value == ingredient}?.key
     }
 
     private fun setUpRecyclerAndCards(){
@@ -80,16 +83,31 @@ class MyCupboard : AppCompatActivity() {
         listOfIngredients.adapter = ingredientAdapter
         listOfIngredients.layoutManager = LinearLayoutManager(this)
 
+        setUpDbAndPopulateCupboard(listOfIngredients)
+
         val addIngredients = findViewById<Button>(R.id.btnAddIngredient)
         addIngredients.setOnClickListener {
             val quantity = findViewById<EditText>(R.id.etIngredientQuantity).text.toString()
-            val ingredient = findViewById<Spinner>(R.id.spinnerIngredients)
+            val ingredient = findViewById<Spinner>(R.id.spinnerIngredients).selectedItem.toString()
             val ingredientUom = findViewById<Spinner>(R.id.spinneruom)
             if (quantity.isNotEmpty()) {
                 val ingredient = Ingredient(picture = findImage(ingredient= ingredient) ,
-                    description = quantity,uom = ingredientUom.selectedItem.toString(), name = ingredient.selectedItem.toString())
-                ingredientAdapter.addIngredient(ingredient)
+                    description = quantity,uom = ingredientUom.selectedItem.toString(), name = ingredient)
+                ingredientAdapter.addNewIngredient(ingredient)
                 findViewById<EditText>(R.id.etIngredientQuantity).setText("")
+            }
+        }
+    }
+
+    private fun setUpDbAndPopulateCupboard(listOfIngredients: RecyclerView){
+        val email = FirebaseUtils.firebaseAuth.currentUser?.email
+        var db = Firebase.firestore
+        val dbGetUser = db.collection("email").document(email!!).collection("MyCupboard").get().addOnSuccessListener { documents ->
+            for (document in documents){
+                Log.d(ContentValues.TAG, document.data.get("Uom").toString())
+                var ingredient = Ingredient(name = document.id, description = document.data.get("Amount")
+                    .toString(), uom = document.data.get("Uom").toString(), picture = findImage(ingredient = document.id))
+                ingredientAdapter.populateRecyclerView(ingredient)
             }
         }
     }

@@ -43,7 +43,7 @@ class RegisterUserTest {
         onView(withId(R.id.btnRegisterUser)).perform(click(),
             pressImeActionButton())
         Intents.intended(hasComponent(RecipeHomePage::class.java.name))
-        onView(withText("Logged in as: ")).check(matches(withId(R.id.tvCurrentUserTitle)))
+//        onView(withText("Logged in as: ")).check(matches(withId(R.id.tvCurrentUserTitle)))
         Thread.sleep(500)
         firebaseAuth.getCurrentUser()!!.delete()
         Intents.release()

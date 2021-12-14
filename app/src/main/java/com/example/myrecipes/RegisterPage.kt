@@ -13,6 +13,7 @@ import android.widget.EditText
 
 import android.widget.TextView
 import android.widget.Toast
+import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
 import com.example.myrecipes.utils.FirebaseUtils.firebaseUser
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -64,6 +65,8 @@ class RegisterPage : AppCompatActivity() {
                         task ->
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
+                        var emailDataBaseUpdater = UsersEmailDbHandler()
+                        emailDataBaseUpdater.newUser(firebaseAuth.currentUser!!.email!!)
                         registrationSuccessToast()
                         redirectRecipePage(email, firebaseUser)
                     } else {
