@@ -16,12 +16,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
-
 class MyCupboard : AppCompatActivity() {
     private lateinit var ingredientAdapter: IngredientItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_cupboard)
@@ -34,7 +32,6 @@ class MyCupboard : AppCompatActivity() {
         val spinnerUom = findViewById<Spinner>(R.id.spinneruom)
 
         setSpinnerAdapter(spinner,spinnerUom)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

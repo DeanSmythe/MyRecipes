@@ -41,17 +41,31 @@
         android:id="@+id/spUomSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etIngredientDescription"
         />
     <Button
-        android:id="@+id/btnUploadIngredient"
+        android:id="@+id/btnUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/toolbar_adder"
+        app:layout_constraintStart_toEndOf="@+id/btnSubmitIngredient"
+        app:layout_constraintTop_toBottomOf="@+id/spUomSpinner" />
+
+
+    <Button
+        android:id="@+id/btnSubmitIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Store ingredient"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnUploadImage"
+        app:layout_constraintStart_toStartOf="@id/toolbar_adder"
         app:layout_constraintTop_toBottomOf="@+id/spUomSpinner" />
 
 
