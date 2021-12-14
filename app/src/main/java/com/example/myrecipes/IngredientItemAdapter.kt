@@ -57,11 +57,11 @@ class IngredientItemAdapter (
     }
 
     fun addNewIngredient(ingredient: Ingredient){
-        ingredients.add(ingredient)
-        notifyItemInserted(ingredients.size - 1)
         updateDb(ingredient)
         Log.d("remove duplicates =",ingredient.name.toString())
         removeDuplicates(comparitor = ingredient.name.toString())
+        ingredients.add(ingredient)
+        notifyItemInserted(ingredients.size - 1)
     }
 
     fun populateRecyclerView(ingredient: Ingredient){
