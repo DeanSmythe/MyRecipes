@@ -22,6 +22,10 @@
         android:title="My Account"
         app:showAsAction="never" />
     <item
+        android:id="@+id/itmCreateRecipe"
+        android:title="Create Recipe"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/itmLogout"
         android:title="Logout"
         app:showAsAction="never" />

@@ -50,6 +50,7 @@ class MyCupboard : AppCompatActivity() {
         when (item.itemId){
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> recipePage()
+            R.id.itmCreateRecipe -> redirectAddRecipePage()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -135,6 +136,11 @@ class MyCupboard : AppCompatActivity() {
 
     private fun recipePage(){
         val intent = Intent(this, RecipeHomePage::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectAddRecipePage(){
+        val intent = Intent(this, AddRecipePage::class.java)
         startActivity(intent)
     }
 }
