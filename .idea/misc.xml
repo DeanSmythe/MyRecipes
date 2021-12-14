@@ -5,12 +5,17 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/password.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_add_recipe_page.xml" value="0.335" />
+<<<<<<< HEAD
+=======
+        <entry key="app/src/main/res/layout/activity_ing_adder.xml" value="0.1453125" />
+>>>>>>> d396d0e (layout added)
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20677083333333332" />
         <entry key="app/src/main/res/layout/activity_my_cupboard.xml" value="0.2269021739130435" />
         <entry key="app/src/main/res/layout/activity_recipe_home_page.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/db_loader.xml" value="0.335" />
         <entry key="app/src/main/res/layout/ingredient_item.xml" value="0.2269021739130435" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/drawable-v24/message.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/drawable/ic_person_icon.xml" value="0.228125" />
         <entry key="app/src/main/res/drawable/square_holder.xml" value="0.228125" />
@@ -26,6 +31,9 @@
         <entry key="app/src/main/res/layout/recipe_item.xml" value="0.18931159420289856" />
         <entry key="app/src/main/res/menu/account_menu.xml" value="0.25" />
     </map>
+=======
+      </map>
+>>>>>>> d396d0e (layout added)
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
