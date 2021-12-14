@@ -31,19 +31,10 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         chooseLocalButtonHandle()
         downloadButtonHandle()
         uploadButtonHandle()
-        imageNameEditHandle()
-        imageUrlEditHandle()
         uploadImageView = findViewById(R.id.uploadImageView)
         uploadProgressBar = findViewById(R.id.transferProgressBar)
         uploadsTextView = findViewById(R.id.uploadsTextView)
-    }
-
-
-    private fun imageNameEditHandle() {
         imageNameEditText = findViewById(R.id.imageNameEditText)
-    }
-
-    private fun imageUrlEditHandle() {
         imageUrlEditText = findViewById(R.id.imageUrlEditText)
     }
 
@@ -80,9 +71,11 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
             Log.i("test:", "download image button clicked")
 
             val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
-            val imageName = imageNameEditText.toString()
-            if (!imageName.isNotBlank()) {
-                imageDatabaseHandler.findUrl(imageName)
+            val imageName = imageNameEditText?.text
+            if (imageName != null) {
+                if (imageName.isNotBlank()) {
+                    imageDatabaseHandler.findUrl(imageName.toString())
+                }
             }
         }
     }
@@ -91,16 +84,19 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         Picasso.with(this).load(imageUrl).into(uploadImageView)
     }
 
+    fun displayChosenImage(currentImage: Image) {
+        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
+        imageNameEditText?.setText(currentImage.imageName, TextView.BufferType.EDITABLE)
+        imageUrlEditText?.setText(currentImage.imageUrl, TextView.BufferType.EDITABLE)
+    }
+
     fun resultedUrl(image: Image) {
         val imageStorageHandler = ImageStorageHandler(this)
         image.imageUrl?.let { imageStorageHandler.getImage(it) }
+        imageUrlEditText?.setText(image.imageUrl, TextView.BufferType.EDITABLE)
+        localRepository.currentImage=image
     }
 
-    fun displayChosenImage(currentImage: Image) {
-        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
-        imageNameEditText?.setText(currentImage.imageName,TextView.BufferType.EDITABLE)
-        imageUrlEditText?.setText(currentImage.imageUrl,TextView.BufferType.EDITABLE)
-    }
     override fun openActivity() {
         imageUploaderNavigationHandler.openActivity()
     }
@@ -108,7 +104,5 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     override fun finishActivity() {
         imageUploaderNavigationHandler.finishActivity()
     }
-
-
 
 }

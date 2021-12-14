@@ -20,6 +20,9 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
         db.collection("images").add(image)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "Added Image ID: ${documentReference.id}")
+
+
+
             }
             .addOnFailureListener { error ->
                 Log.w(ContentValues.TAG, "Error adding document", error)
@@ -53,7 +56,7 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
 
     fun findUrl(imageName: String) {
         val images = mutableListOf<Image>()
-        db.collection("imagess")
+        db.collection("images")
             .whereEqualTo("imageName", imageName)
             .get()
             .addOnSuccessListener { documents ->
