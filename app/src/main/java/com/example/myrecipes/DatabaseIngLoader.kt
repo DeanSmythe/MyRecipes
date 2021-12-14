@@ -15,7 +15,7 @@ class DatabaseIngLoader {
     var allIngredients: ArrayList<Ingredient> = ArrayList()
 
     fun loadDefaultIngToDb() {
-        val ingredient1 = Ingredient("Milk", "Semi-skimmed", UnitOfMeasure.ML , "#")
+        val ingredient1 = Ingredient("Milk", "Semi-skimmed", UnitOfMeasure.ML, "#")
         allIngredients.add(ingredient1)
         val ingredient2 = Ingredient("Egg", "Medium", UnitOfMeasure.EACH, "#")
         allIngredients.add(ingredient2)
@@ -79,25 +79,45 @@ class DatabaseIngLoader {
 //            .result.toString()
 //    }
 
-    suspend fun emptyIngredients() = coroutineScope {
-        launch {
-            Log.println(Log.WARN, "", "In function")
-            Log.println(Log.WARN, "", "Database $db")
-            db.collection("ingredients").get()
-                .addOnCompleteListener {
-                    Log.println(Log.WARN, "", "Querying to empty")
-                    for (document in it.result.documents) {
-                        Log.println(
-                            Log.WARN,
-                            "",
-                            "DocumentSnapshot with ID: ${document.id} deleted"
-                        )
-                        document.reference.delete()
-                    }
-                    Log.println(Log.WARN, "", "Leaving function")
+
+    fun emptyIngredients() {
+        Log.println(Log.WARN, "", "In function")
+        Log.println(Log.WARN, "", "Database $db")
+        db.collection("ingredients").get()
+            .addOnCompleteListener {
+                Log.println(Log.WARN, "", "Querying to empty")
+                for (document in it.result.documents) {
+                    Log.println(
+                        Log.WARN,
+                        "",
+                        "DocumentSnapshot with ID: ${document.id} deleted"
+                    )
+                    document.reference.delete()
                 }
-        }
+                Log.println(Log.WARN, "", "Leaving function")
+            }
     }
+
+
+//    suspend fun emptyIngredients() = coroutineScope {
+//        launch {
+//            Log.println(Log.WARN, "", "In function")
+//            Log.println(Log.WARN, "", "Database $db")
+//            db.collection("ingredients").get()
+//                .addOnCompleteListener {
+//                    Log.println(Log.WARN, "", "Querying to empty")
+//                    for (document in it.result.documents) {
+//                        Log.println(
+//                            Log.WARN,
+//                            "",
+//                            "DocumentSnapshot with ID: ${document.id} deleted"
+//                        )
+//                        document.reference.delete()
+//                    }
+//                    Log.println(Log.WARN, "", "Leaving function")
+//                }
+//        }
+//    }
 
     fun emptyAndFill() = runBlocking {
         emptyIngredients()
