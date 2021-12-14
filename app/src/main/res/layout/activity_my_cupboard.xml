@@ -6,48 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListOfIngredients"
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar_login"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddIngredient"
+        android:layout_height="wrap_content"
+        android:background="#CCCCCC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="My Cupboard"
+        app:titleTextColor="#000000" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListOfIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnAddIngredient"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_login" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/square_holder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/spinnerIngredients" />
 
-    <EditText
-        android:id="@+id/etIngredientQuantity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter Amount:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/etIngredientQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Amount:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnAddIngredient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinneruom" />
+        <Button
+            android:id="@+id/btnAddIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/spinneruom" />
 
-    <Spinner
-        android:id="@+id/spinneruom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etIngredientQuantity" />
+        <Spinner
+            android:id="@+id/spinneruom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etIngredientQuantity" />
 
 
-    <Spinner
-        android:id="@+id/spinnerIngredients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/etIngredientQuantity"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Spinner
+            android:id="@+id/spinnerIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintBottom_toTopOf="@+id/etIngredientQuantity"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
