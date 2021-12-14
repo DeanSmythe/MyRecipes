@@ -1,5 +1,6 @@
 package com.example.myrecipes
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,9 @@ import com.example.myrecipes.data.Image
 import com.example.myrecipes.data.ImageDatabaseHandler
 import com.example.myrecipes.data.LocalRepository
 import com.squareup.picasso.Picasso
+import permissions.dispatcher.RuntimePermissions
 
+@RuntimePermissions
 class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     private val localRepository: LocalRepository = LocalRepository()
     private var chooseImageButton: Button? = null
@@ -51,7 +54,8 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         Log.i("test:", "choose local image button clicked")
         chooseLocalImageButton = findViewById(R.id.chooseLocalImageButton)
         chooseLocalImageButton?.setOnClickListener {
-
+            val imageLocalHandler = ImageLocalHandler(this)
+            imageLocalHandler.onPickPhoto()
         }
     }
 
@@ -94,7 +98,7 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         val imageStorageHandler = ImageStorageHandler(this)
         image.imageUrl?.let { imageStorageHandler.getImage(it) }
         imageUrlEditText?.setText(image.imageUrl, TextView.BufferType.EDITABLE)
-        localRepository.currentImage=image
+        localRepository.currentImage = image
     }
 
     override fun openActivity() {
@@ -103,6 +107,11 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
 
     override fun finishActivity() {
         imageUploaderNavigationHandler.finishActivity()
+    }
+
+     fun loadImage(selectedImage: Bitmap?) {
+        val ivPreview: ImageView = findViewById(R.id.uploadImageView) as ImageView
+        ivPreview.setImageBitmap(selectedImage)
     }
 
 }
