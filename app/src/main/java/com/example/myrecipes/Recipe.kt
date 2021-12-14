@@ -46,6 +46,16 @@ data class Recipe(
         return id.toString()
     }
 
+    fun writeRecipe(recipe: Recipe) {
+        db.collection("recipes").add(recipe)
+            .addOnSuccessListener { documentReference ->
+                Log.d(ContentValues.TAG, "DocumentSnapshot Recipe added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding Recipe document", e)
+            }
+    }
+
     fun updateRecipe(recipe: Recipe) {
         db.collection("recipes").document(recipe.id)
             .update(

@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import com.example.myrecipes.utils.FirebaseUtils
 import java.lang.Exception
@@ -21,6 +19,10 @@ class AddRecipePage : AppCompatActivity() {
         setContentView(R.layout.activity_add_recipe_page)
         toolbar = findViewById(R.id.toolbar_AddRecipe)
         setSupportActionBar(toolbar)
+
+        val spinner =  findViewById<Spinner>(R.id.spDietSpinner)
+        setSpinnerAdapter(spinner)
+
         var submitRecipe = findViewById<Button>(R.id.btnRecipeSubmit)
         submitRecipe.setOnClickListener {
             val recipeTitle = findViewById<EditText>(R.id.etRecipeName).text.toString()
@@ -28,7 +30,8 @@ class AddRecipePage : AppCompatActivity() {
             val timeToMake = findViewById<EditText>(R.id.etTimeToMake).text.toString()
             if (recipeTitle.isNotEmpty() && recipeDescription.isNotEmpty() && timeToMake.isNotEmpty()){
                 Log.d("check not empty","Working")
-
+                val recipe = Recipe()
+                recipe.writeNewRecipe(name =recipeTitle, description = recipeDescription, timetomake = timeToMake.toInt(),picture = "#", rating=0, diet=Diet.NONE )
             }
         }
     }
@@ -49,6 +52,15 @@ class AddRecipePage : AppCompatActivity() {
             R.id.itmCreateRecipe -> redirectRecipePage()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setSpinnerAdapter(spinner: Spinner){
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.diet,
+            android.R.layout.simple_spinner_item
+        ).also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = arrayAdapter}
     }
 
     private fun signOut(){
