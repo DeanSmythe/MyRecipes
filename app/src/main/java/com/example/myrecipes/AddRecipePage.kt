@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.get
 import com.example.myrecipes.utils.FirebaseUtils
 import java.lang.Exception
 
@@ -28,10 +29,11 @@ class AddRecipePage : AppCompatActivity() {
             val recipeTitle = findViewById<EditText>(R.id.etRecipeName).text.toString()
             val recipeDescription = findViewById<EditText>(R.id.etRecipeDesc).text.toString()
             val timeToMake = findViewById<EditText>(R.id.etTimeToMake).text.toString()
+            val dietRequirement = findViewById<Spinner>(R.id.spDietSpinner).selectedItem.toString()
             if (recipeTitle.isNotEmpty() && recipeDescription.isNotEmpty() && timeToMake.isNotEmpty()){
                 Log.d("check not empty","Working")
                 val recipe = Recipe()
-                recipe.writeNewRecipe(name =recipeTitle, description = recipeDescription, timetomake = timeToMake.toInt(),picture = "#", rating=0, diet=Diet.NONE )
+                recipe.writeNewRecipe(name =recipeTitle, description = recipeDescription, timetomake = timeToMake.toInt(),picture = "#", rating=0, diet=dietRequirement )
             }
         }
     }
