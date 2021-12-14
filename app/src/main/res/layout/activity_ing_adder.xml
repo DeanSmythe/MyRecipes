@@ -21,12 +21,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:ems="10"
         android:inputType="textPersonName"
-        android:text="Ingredient Name"
+        android:hint="Ingredient Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_adder" />
+
+    <EditText
+        android:id="@+id/etIngredientDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:hint="Ingredient Description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etIngredientName" />
+    <Spinner
+        android:id="@+id/spUomSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etIngredientDescription"
+        />
+    <Button
+        android:id="@+id/btnUploadIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Store ingredient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spUomSpinner" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
