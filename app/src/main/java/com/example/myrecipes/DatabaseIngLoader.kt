@@ -81,7 +81,7 @@ class DatabaseIngLoader {
 
 
     fun emptyIngredients() {
-        Log.println(Log.WARN, "", "In function")
+        Log.println(Log.WARN, "", "In emptyIngredients function")
         Log.println(Log.WARN, "", "Database $db")
         db.collection("ingredients").get()
             .addOnCompleteListener {
