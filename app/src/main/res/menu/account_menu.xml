@@ -14,16 +14,20 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/itmMyCupboard"
-        android:title="My Cupboard"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/itmMyAccount"
         android:title="My Account"
         app:showAsAction="never" />
     <item
+        android:id="@+id/itmMyCupboard"
+        android:title="My Cupboard"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/itmCreateRecipe"
         android:title="Create Recipe"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itmAddIngredient"
+        android:title="Add Ingredient"
         app:showAsAction="never" />
     <item
         android:id="@+id/itmLogout"

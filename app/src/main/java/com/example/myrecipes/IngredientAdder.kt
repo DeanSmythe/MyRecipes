@@ -41,8 +41,8 @@ class IngredientAdder : AppCompatActivity() {
         menuInflater.inflate(R.menu.account_menu,menu)
         var currentUser = menu?.findItem(R.id.itmLoggedInAs)
         currentUser?.setTitle(setUsername())
-        var itmCreateRecipeChangeTitle = menu?.findItem(R.id.itmCreateRecipe)
-        itmCreateRecipeChangeTitle?.setTitle("Add Ingredient")
+        var itmAddIngChangeTitle = menu?.findItem(R.id.itmAddIngredient)
+        itmAddIngChangeTitle?.setTitle("Recipe Page")
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -51,6 +51,7 @@ class IngredientAdder : AppCompatActivity() {
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> myCupboard()
             R.id.itmCreateRecipe -> redirectRecipePage()
+            R.id.itmAddIngredient -> redirectAddRecipePage()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -81,6 +82,11 @@ class IngredientAdder : AppCompatActivity() {
 
     private fun redirectRecipePage(){
         val intent = Intent(this, RecipeHomePage::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectAddRecipePage(){
+        val intent = Intent(this, AddRecipePage::class.java)
         startActivity(intent)
     }
 
