@@ -19,6 +19,10 @@ class DbLoader : AppCompatActivity() {
         DatabaseRecipeLoader().loadDefaultRecipeToDb()
     }
 
+    fun emptyRecipesDB(view : View){
+        DatabaseRecipeLoader().emptyRecipes()
+    }
+
     fun loadRecipeIngDB(view : View) {
         DatabaseRecipeIngLoader().loadDefaultRecipeIng()
     }

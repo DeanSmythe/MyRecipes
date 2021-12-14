@@ -13,6 +13,7 @@
     <string name="ing_load_button">"Load default ing"</string>
     <string name="ing_empty_button">"Delete ingredients"</string>
     <string name="recipe_load_button">"Load default recipes"</string>
+    <string name="recipe_empty_button">"Delete all recipes"</string>
     <string name="recipe_ing_load_button">"Load recipe-ing"</string>
 
     <string-array name="ingredients">
