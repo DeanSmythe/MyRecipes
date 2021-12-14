@@ -15,8 +15,7 @@ class DatabaseRecipeLoader {
     fun loadDefaultRecipeToDb() {
         val recipe1 = Recipe("Beans on Toast", "A Family Favourite!", 10, "#", 5, Diet.VEGAN)
         allRecipes.add(recipe1)
-        val recipe2 =
-            Recipe("Pancakes", "Sweet or Savoury, a quick fix.", 20, "#", 4, Diet.VEGETARIAN)
+        val recipe2 = Recipe("Pancakes", "Sweet or Savoury, a quick fix.", 20, "#", 4, Diet.VEGETARIAN)
         allRecipes.add(recipe2)
         val recipe3 = Recipe("Pasta al Pomodoro", "Fast and Filling", 25, "#", 4, Diet.VEGETARIAN)
         allRecipes.add(recipe3)
@@ -40,7 +39,7 @@ class DatabaseRecipeLoader {
                 .addOnFailureListener { error ->
                     Log.w(ContentValues.TAG, "Error adding document", error)
                 }
-                .result.toString()
+//                .result.toString()
         }
 
         suspend fun emptyRecipes() = coroutineScope {

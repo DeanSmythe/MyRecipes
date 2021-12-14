@@ -45,6 +45,7 @@ class DatabaseIngLoader {
         allIngredients.add(ingredient14)
 
         for (ingredient in allIngredients) {
+            Log.d(ContentValues.TAG, "Trying  $ingredient")
             val ingredientData = hashMapOf(
                 "name" to ingredient.name,
                 "description" to ingredient.description,
@@ -61,7 +62,7 @@ class DatabaseIngLoader {
                 .addOnFailureListener { error ->
                     Log.w(ContentValues.TAG, "Error adding document", error)
                 }
-                .result.toString()
+//                .result.toString()
         }
 //        val returnID = localWriteIngredient(ingredient)
     }

@@ -46,7 +46,7 @@ class DatabaseRecipeIngLoader {
             .addOnFailureListener{ error ->
             Log.w(ContentValues.TAG, "Error adding document", error)
         }
-            .result.toString()
+//            .result.toString()
     }
 
 
