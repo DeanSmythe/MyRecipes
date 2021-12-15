@@ -21,7 +21,7 @@ class IngredientMethodActivity : AppCompatActivity() {
 
         // Tabs Customization
         tab_layout.setSelectedTabIndicatorColor(Color.WHITE)
-        tab_layout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        tab_layout.setBackgroundColor(ContextCompat.getColor(this, R.color.purple_700))
         tab_layout.tabTextColors = ContextCompat.getColorStateList(this, android.R.color.white)
 
         // Set different Text Color for Tabs for when are selected or not
