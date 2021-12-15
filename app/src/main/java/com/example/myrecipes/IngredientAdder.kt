@@ -17,13 +17,13 @@ class IngredientAdder : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ing_adder)
-        toolbar = findViewById(R.id.toolbar_login)
+        toolbar = findViewById(R.id.toolbar_adder)
         setSupportActionBar(toolbar)
 
         val spinner = findViewById<Spinner>(R.id.spUomSpinner)
         setSpinnerAdapter(spinner)
 
-        var submitIng = findViewById<Button>(R.id.btnAddIngredient)
+        var submitIng = findViewById<Button>(R.id.btnSubmitIngredient)
         submitIng.setOnClickListener {
             val ingredientName = findViewById<EditText>(R.id.etIngredientName).text.toString()
             val ingredientDescription =
