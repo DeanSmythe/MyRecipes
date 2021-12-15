@@ -21,6 +21,9 @@
             android:name=".ImageUploader"
             android:exported="false" />
         <activity
+            android:name=".AddRecipePage"
+            android:exported="false" />
+        <activity
             android:name=".MyCupboard"
             android:exported="false" />
         <activity

@@ -38,4 +38,13 @@
         <item>oz</item>
         <item>fl.oz</item>
     </string-array>
+
+    <string-array name="diet">
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+        <item>Halal</item>
+        <item>Kosher</item>
+        <item>None</item>
+    </string-array>
+
 </resources>

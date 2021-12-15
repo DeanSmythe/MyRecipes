@@ -1,18 +1,25 @@
 package com.example.myrecipes
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
+import com.example.myrecipes.utils.FirebaseUtils.firebaseUser
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.ktx.Firebase
 
 class RegisterPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +28,8 @@ class RegisterPage : AppCompatActivity() {
 
         val btnShowHide = findViewById<Button>(R.id.btnShowHide)
         val btnRegisterUser = findViewById<Button>(R.id.btnRegisterUser)
-        val etRegisterPassword = findViewById<EditText>(R.id.etRegisterPassword)
-        val etRegisterUsername = findViewById<EditText>(R.id.etRegisterUsername)
+        var etRegisterPassword = findViewById<EditText>(R.id.etRegisterPassword)
+        var etRegisterUsername = findViewById<EditText>(R.id.etRegisterUsername)
 
         btnShowHide.setOnClickListener {
             showOrHideButton(etRegisterPassword, btnShowHide)
@@ -33,7 +40,6 @@ class RegisterPage : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun showOrHideButton(etRegisterPassword: EditText, btnShowHide: Button ){
         if(btnShowHide.text.toString().equals("Show")) {
             etRegisterPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -59,6 +65,8 @@ class RegisterPage : AppCompatActivity() {
                         task ->
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
+                        var emailDataBaseUpdater = UsersEmailDbHandler()
+                        emailDataBaseUpdater.newUser(firebaseAuth.currentUser!!.email!!)
                         registrationSuccessToast()
                         redirectRecipePage(email, firebaseUser)
                     } else {

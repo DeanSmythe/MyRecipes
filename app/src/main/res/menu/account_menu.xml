@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/itmDropDownIcons"
+        android:icon="@drawable/ic_person_icon"
+        android:title="menu"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itmLoggedInAs"
+        android:title="Logged In As: "
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/itmMyCupboard"
+        android:title="My Cupboard"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itmMyAccount"
+        android:title="My Account"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itmCreateRecipe"
+        android:title="Create Recipe"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/itmLogout"
+        android:title="Logout"
+        app:showAsAction="never" />
+</menu>
