@@ -1,11 +1,15 @@
 package com.example.myrecipes
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myrecipes.data.LocalRepository
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 
 class ImagesAdapter constructor(
@@ -14,8 +18,8 @@ class ImagesAdapter constructor(
 ) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageImageView = itemView.findViewById<ImageView>(R.id.imageImageView)
-        val context = itemView.context
+        val imageImageView: ImageView = itemView.findViewById(R.id.imageImageView)
+        val context: Context = itemView.context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,14 +29,25 @@ class ImagesAdapter constructor(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
-            Picasso.with(context).load(localRepository.images[position].imageUrl).into(imageImageView)
             imageImageView.setOnClickListener {
                 localRepository.apply {
-                    saveCurrentImage(images[position]);
+                    saveCurrentImage(images[position])
                 }
                 imagePicker.finishActivity()
             }
-        }
+            if (localRepository.images[position].imageUrl != null && localRepository.images[position].imageUrl != "") {
+                val storage = Firebase.storage
+                val storageRef = storage.reference
+
+                localRepository.images[position].imageUrl?.let { url ->
+                    storageRef.child(url).downloadUrl.addOnSuccessListener {
+                        Picasso.with(context).load(it).into(imageImageView)
+                    }.addOnFailureListener {
+                        Log.i("ImageDownloader:", "unable to get Image")
+                    }
+                }
+            }
+       }
     }
 
     override fun getItemCount() = localRepository.images.size
