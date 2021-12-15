@@ -8,8 +8,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
+
 class DatabaseIngLoader {
-    private val db = Firebase.firestore
+    val db = Firebase.firestore
     var allIngredients: ArrayList<Ingredient> = ArrayList()
 
     fun loadDefaultIngToDb() {
@@ -21,13 +22,13 @@ class DatabaseIngLoader {
         allIngredients.add(ingredient3)
         val ingredient4 = Ingredient("Bread", "Sliced", "each", "#")
         allIngredients.add(ingredient4)
-        val ingredient5 = Ingredient("Baked Beans", "Tinned","Grams", "#")
+        val ingredient5 = Ingredient("Baked Beans", "Tinned", "Grams", "#")
         allIngredients.add(ingredient5)
         val ingredient6 = Ingredient("Broccoli", "Fresh", "Grams", "#")
         allIngredients.add(ingredient6)
         val ingredient7 = Ingredient("Pasta", "Spaghetti", "Grams", "#")
         allIngredients.add(ingredient7)
-        val ingredient8 = Ingredient("Tomato", "Fresh", "Grams","#")
+        val ingredient8 = Ingredient("Tomato", "Fresh", "Grams", "#")
         allIngredients.add(ingredient8)
         val ingredient9 = Ingredient("Tinned Tomatoes", "Chopped", "Grams", "#")
         allIngredients.add(ingredient9)
@@ -50,19 +51,23 @@ class DatabaseIngLoader {
                 "uom" to ingredient.uom,
                 "picture" to ingredient.picture
             )
-            db.collection("ingredients").add(ingredientData)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(
-                        ContentValues.TAG,
-                        "DocumentSnapshot added with ID: ${documentReference.id}"
-                    )
-                }
-                .addOnFailureListener { error ->
-                    Log.w(ContentValues.TAG, "Error adding document", error)
-                }
 
+            db.collection("ingredients").document("${ingredient.name}").get()
+                .addOnCompleteListener { docSnapshot ->
+                    if (docSnapshot.result.exists().not()) {
+                        db.collection("ingredients").add(ingredientData)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d(
+                                    ContentValues.TAG,
+                                    "DocumentSnapshot added with ID: ${documentReference.id}"
+                                )
+                            }
+                            .addOnFailureListener { error ->
+                                Log.w(ContentValues.TAG, "Error adding document", error)
+                            }
+                    }
+                }
         }
-
     }
 
     fun emptyIngredients() {
@@ -79,7 +84,7 @@ class DatabaseIngLoader {
                     )
                     document.reference.delete()
                 }
-                Log.println(Log.WARN, "", "Leaving function")
+                Log.println(Log.WARN, "", "Leaving delete function")
             }
     }
 
