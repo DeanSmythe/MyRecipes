@@ -17,7 +17,7 @@ class IngredientMethodActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ingredients_method_page)
 
         // Tabs Customization
         tab_layout.setSelectedTabIndicatorColor(Color.WHITE)

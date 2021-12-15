@@ -94,7 +94,7 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
     }
 
     override fun onCellClickListener() {
-        Toast.makeText(this,"Cell Clicked",
-        Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, IngredientMethodActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -21,6 +21,8 @@
         <activity
             android:name=".RecipeHomePage"
             android:exported="false" />
+        <activity android:name=".IngredientMethodActivity"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
