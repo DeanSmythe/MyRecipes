@@ -56,6 +56,7 @@ class RecipeHomePage : AppCompatActivity() {
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> myCupboard()
             R.id.itmCreateRecipe -> redirectRecipePage()
+            R.id.itmAddIngredient -> redirectIngAddPage()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -90,6 +91,11 @@ class RecipeHomePage : AppCompatActivity() {
 
     private fun redirectRecipePage(){
         val intent = Intent(this, AddRecipePage::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectIngAddPage(){
+        val intent = Intent(this, IngredientAdder::class.java)
         startActivity(intent)
     }
 }

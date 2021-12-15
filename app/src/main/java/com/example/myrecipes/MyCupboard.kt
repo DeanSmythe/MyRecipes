@@ -16,12 +16,10 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
 
-
 class MyCupboard : AppCompatActivity() {
     private lateinit var ingredientAdapter: IngredientItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_cupboard)
@@ -34,7 +32,6 @@ class MyCupboard : AppCompatActivity() {
         val spinnerUom = findViewById<Spinner>(R.id.spinneruom)
 
         setSpinnerAdapter(spinner,spinnerUom)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -51,6 +48,7 @@ class MyCupboard : AppCompatActivity() {
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> recipePage()
             R.id.itmCreateRecipe -> redirectAddRecipePage()
+            R.id.itmAddIngredient -> redirectIngAddPage()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -141,6 +139,11 @@ class MyCupboard : AppCompatActivity() {
 
     private fun redirectAddRecipePage(){
         val intent = Intent(this, AddRecipePage::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectIngAddPage(){
+        val intent = Intent(this, IngredientAdder::class.java)
         startActivity(intent)
     }
 }
