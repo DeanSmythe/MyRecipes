@@ -18,6 +18,7 @@
     <string name="choose_local_image">CHOOSE LOCAL IMAGE</string>
     <string name="name">Name:</string>
     <string name="url">URL:</string>
+    <string name="upload_view">UPLOAD VIEW</string>
 
     <string-array name="ingredients">
         <item>Eggs</item>

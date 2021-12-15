@@ -22,6 +22,7 @@ class ImageUploader : AppCompatActivity() {
     private var chooseImageButton: Button? = null
     private var chooseLocalImageButton: Button? = null
     private var uploadImageButton: Button? = null
+    private var uploadViewButton: Button? = null
     private var downloadImageButton: Button? = null
     private var imageNameEditText: EditText? = null
     private lateinit var imageUrlEditText: EditText
@@ -38,6 +39,7 @@ class ImageUploader : AppCompatActivity() {
         chooseLocalButtonHandle()
         downloadButtonHandle()
         uploadButtonHandle()
+        uploadViewButtonHandle()
         uploadImageView = findViewById(R.id.uploadImageView)
         uploadProgressBar = findViewById(R.id.transferProgressBar)
         uploadsTextView = findViewById(R.id.uploadsTextView)
@@ -59,7 +61,7 @@ class ImageUploader : AppCompatActivity() {
         chooseLocalImageButton = findViewById(R.id.chooseLocalImageButton)
         chooseLocalImageButton?.setOnClickListener {
             Log.i("test:", "choose local image button clicked")
-            openActivity()
+            openLocalMedia()
         }
     }
 
@@ -67,9 +69,23 @@ class ImageUploader : AppCompatActivity() {
         uploadImageButton = findViewById(R.id.uploadImageButton)
         uploadImageButton?.setOnClickListener {
             Log.i("test:", "upload image button clicked")
-            val image = Image(imageNameEditText.toString(), imageUrlEditText.toString())
-            val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
-            imageDatabaseHandler.uploadImage(image)
+            if (imageNameEditText?.text.toString() != "" && imageUrlEditText.text.toString() != "") {
+                val image = Image(imageNameEditText?.text.toString(), imageUrlEditText.text.toString())
+                val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
+                imageDatabaseHandler.uploadImage(image)
+            }
+        }
+    }
+
+    private fun uploadViewButtonHandle() {
+        uploadViewButton = findViewById(R.id.uploadViewButton)
+        uploadViewButton?.setOnClickListener {
+            Log.i("test:", "upload view button clicked")
+            if (imageNameEditText?.text.toString() != "" && imageUrlEditText.text.toString() != "") {
+                val image = Image(imageNameEditText?.text.toString(), imageNameEditText?.text.toString())
+                val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
+                imageDatabaseHandler.uploadImage(image)
+            }
         }
     }
 
@@ -95,7 +111,7 @@ class ImageUploader : AppCompatActivity() {
     fun displayChosenImage(currentImage: Image) {
         Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
         imageNameEditText?.setText(currentImage.imageName, TextView.BufferType.EDITABLE)
-        imageUrlEditText?.setText(currentImage.imageUrl, TextView.BufferType.NORMAL)
+        imageUrlEditText.setText(currentImage.imageUrl, TextView.BufferType.NORMAL)
     }
 
     fun resultedUrl(image: Image) {
@@ -113,7 +129,7 @@ class ImageUploader : AppCompatActivity() {
     }
 
 
-    fun openActivity() {
+    fun openLocalMedia() {
         val intent = Intent(
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -126,8 +142,11 @@ class ImageUploader : AppCompatActivity() {
     private var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result != null && result.resultCode == Activity.RESULT_OK) {
             val data = result.data?.data
+            val path = data?.path
+
             Picasso.with(this).load(data).into(uploadImageView)
-            localRepository.currentImage?.let { displayChosenImage(it) }
+            imageNameEditText?.setText("", TextView.BufferType.NORMAL)
+            imageUrlEditText.setText(data.toString(), TextView.BufferType.NORMAL)
         }
     }
 }

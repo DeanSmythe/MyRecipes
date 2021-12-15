@@ -3,6 +3,7 @@ package com.example.myrecipes.data
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.myrecipes.ImageStorageHandler
 import com.example.myrecipes.ImageUploaderNavigationHandler
 import com.example.myrecipes.ImageUploader
 import com.google.firebase.firestore.QueryDocumentSnapshot
@@ -13,6 +14,8 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
     private val db = Firebase.firestore
 
     fun uploadImage(image: Image) {
+        val imageStorageHandler = ImageStorageHandler(imageUploader)
+        imageStorageHandler.uploadImage(image)
         executeUploadRequest(image)
     }
 
