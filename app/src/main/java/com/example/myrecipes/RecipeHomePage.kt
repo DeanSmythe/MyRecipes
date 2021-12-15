@@ -56,6 +56,7 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> myCupboard()
             R.id.itmCreateRecipe -> redirectRecipePage()
+            R.id.itmAddIngredient -> redirectIngAddPage()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -93,8 +94,14 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         startActivity(intent)
     }
 
+
     override fun onCellClickListener() {
         val intent = Intent(this, IngredientMethodActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectIngAddPage(){
+        val intent = Intent(this, IngredientAdder::class.java)
         startActivity(intent)
     }
 }

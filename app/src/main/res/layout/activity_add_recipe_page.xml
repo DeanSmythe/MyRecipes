@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Recipe name"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_AddRecipe" />
@@ -33,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Recipe Description"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRecipeName" />
@@ -42,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Time to make"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRecipeDesc" />
@@ -51,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload Image"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/toolbar_AddRecipe"
         app:layout_constraintStart_toEndOf="@+id/btnRecipeSubmit"
         app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
@@ -60,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Recipe"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
         app:layout_constraintStart_toStartOf="@+id/toolbar_AddRecipe"
         app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
@@ -68,6 +73,7 @@
         android:id="@+id/spDietSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etTimeToMake"

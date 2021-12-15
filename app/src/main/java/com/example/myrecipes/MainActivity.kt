@@ -10,6 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.lang.Boolean.TRUE
 
 class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -19,6 +23,18 @@ class MainActivity : AppCompatActivity() {
 
         toolbar = findViewById(R.id.toolbar_login)
         setSupportActionBar(toolbar)
+
+//        firebaseAuth.useEmulator("10.0.2.2", 9099)
+
+        val db = Firebase.firestore
+//        if (TRUE) {
+//            val settings = FirebaseFirestoreSettings.Builder()
+//                .setHost("10.0.2.2:8080")
+//                .setPersistenceEnabled(false)
+//                .setSslEnabled(false)
+//                .build()
+//            db.firestoreSettings = settings
+//        }
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {

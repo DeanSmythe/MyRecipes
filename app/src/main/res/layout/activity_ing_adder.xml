@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar_adder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCCCC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Add an ingredient:"
+        app:titleTextColor="#000000" />
+
+    <EditText
+        android:id="@+id/etIngredientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:hint="Ingredient Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_adder" />
+
+    <EditText
+        android:id="@+id/etIngredientDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:hint="Ingredient Description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etIngredientName" />
+    <Spinner
+        android:id="@+id/spUomSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etIngredientDescription"
+        />
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/toolbar_adder"
+        app:layout_constraintStart_toEndOf="@+id/btnSubmitIngredient"
+        app:layout_constraintTop_toBottomOf="@+id/spUomSpinner" />
+
+
+    <Button
+        android:id="@+id/btnSubmitIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Store ingredient"
+        app:layout_constraintEnd_toStartOf="@id/btnUploadImage"
+        app:layout_constraintStart_toStartOf="@id/toolbar_adder"
+        app:layout_constraintTop_toBottomOf="@+id/spUomSpinner" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
