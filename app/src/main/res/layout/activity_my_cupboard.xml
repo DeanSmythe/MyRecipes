@@ -11,14 +11,14 @@
         android:id="@+id/toolbar_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#CCCCCC"
+        android:background="@color/design_default_color_primary_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:title="My Cupboard"
         app:titleTextColor="#000000" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvListOfIngredients"
+            android:id="@+id/rvListOfIngredientsRecipe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/btnAddIngredient"

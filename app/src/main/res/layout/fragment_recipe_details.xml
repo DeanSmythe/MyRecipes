@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecipeDetailsFragment">
+
     <EditText
         android:id="@+id/etRecipeName"
         android:layout_width="wrap_content"
@@ -19,8 +20,8 @@
         android:id="@+id/etRecipeDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Recipe Description"
         android:layout_marginTop="16dp"
+        android:hint="Recipe Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRecipeName" />
@@ -29,8 +30,8 @@
         android:id="@+id/etTimeToMake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Time to make"
         android:layout_marginTop="16dp"
+        android:hint="Time to make"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRecipeDesc" />
@@ -39,8 +40,9 @@
         android:id="@+id/btnUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Upload Image"
-        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRecipeSubmit"
         app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
 
@@ -48,9 +50,10 @@
         android:id="@+id/btnRecipeSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Submit Recipe"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
+        app:layout_constraintEnd_toStartOf="@id/btnUploadImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
 
     <Spinner
@@ -58,10 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etTimeToMake"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTimeToMake" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

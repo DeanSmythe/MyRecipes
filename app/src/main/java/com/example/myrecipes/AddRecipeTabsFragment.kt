@@ -1,5 +1,6 @@
 package com.example.myrecipes
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,41 +29,7 @@ class AddRecipeTabsFragment : Fragment() {
 
         rootView.fragment_name.text = fragmentName
 
-        val recipeDetailsFragment = RecipeDetailsFragment()
-        val spinner = spDietSpinner
-        setSpinnerAdapter(spinner)
-
-        var submitRecipe = btnRecipeSubmit
-        submitRecipe.setOnClickListener {
-            val recipeTitle = etRecipeName.text.toString()
-            val recipeDescription = etRecipeDesc.text.toString()
-            val timeToMake = etTimeToMake.text.toString()
-            val dietRequirement = spDietSpinner.selectedItem.toString()
-            if (recipeTitle.isNotEmpty() && recipeDescription.isNotEmpty() && timeToMake.isNotEmpty()) {
-                Log.d("check not empty", "Working")
-                val recipe = Recipe()
-                recipe.writeNewRecipe(
-                    name = recipeTitle,
-                    description = recipeDescription,
-                    timetomake = timeToMake.toInt(),
-                    picture = "#",
-                    rating = 0,
-                    diet = dietRequirement
-                )
-
-            }
-        }
-
         return rootView
-    }
-
-    private fun setSpinnerAdapter(spinner: Spinner){
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.diet,
-            android.R.layout.simple_spinner_item
-        ).also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = arrayAdapter}
     }
 
 }

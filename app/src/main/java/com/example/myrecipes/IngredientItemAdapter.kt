@@ -64,6 +64,12 @@ class IngredientItemAdapter (
         notifyItemInserted(ingredients.size - 1)
     }
 
+    fun addNewIngredientRecipe(ingredient: Ingredient){
+        updateDbRecipe(ingredient)
+        ingredients.add(ingredient)
+        notifyItemInserted(ingredients.size - 1)
+    }
+
     fun populateRecyclerView(ingredient: Ingredient){
         ingredients.add(ingredient)
         notifyItemInserted(ingredients.size - 1)
@@ -72,6 +78,11 @@ class IngredientItemAdapter (
     fun updateDb(ingredient: Ingredient){
         var emailDataBaseUpdater = UsersEmailDbHandler()
         emailDataBaseUpdater.newCupboardItem(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!)
+    }
+
+    fun updateDbRecipe(ingredient: Ingredient){
+        var recipeAdapter = RecipeDbHandler()
+        recipeAdapter.setIngredientsRecipe(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!, RecipeName = ingredient.recipeName!!)
     }
     override fun getItemCount(): Int {
         return ingredients.size

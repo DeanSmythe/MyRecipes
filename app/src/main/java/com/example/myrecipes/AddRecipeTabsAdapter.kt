@@ -13,8 +13,8 @@ class AddRecipeTabsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private va
             0 -> {
                 // Ingredients Fragment
                 val bundle = Bundle()
-                bundle.putString("fragmentName", "Details")
-                val AddRecipeFragment = AddRecipeTabsFragment()
+                bundle.putString("RecipeName", "Details")
+                val AddRecipeFragment = RecipeDetailsFragment()
                 AddRecipeFragment.arguments = bundle
                 return AddRecipeFragment
             }
@@ -22,7 +22,7 @@ class AddRecipeTabsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private va
                 // # Recipe Fragment
                 val bundle = Bundle()
                 bundle.putString("fragmentName", "Ingredients")
-                val ingredientsFragment = AddRecipeTabsFragment()
+                val ingredientsFragment = RecipeAddIngredientsFragment()
                 ingredientsFragment.arguments = bundle
                 return ingredientsFragment
             }
@@ -41,5 +41,6 @@ class AddRecipeTabsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private va
     override fun getItemCount(): Int {
         return numberOfTabs
     }
+
 
 }

@@ -66,17 +66,17 @@ class AddRecipePage : AppCompatActivity() {
             TabLayoutMediator(tab_layout_addrecipe, tabs_viewpager_addrecipe) { tab, position ->
                 when (position) {
                     0 -> {
-                        tab.text = "Ingredients"
+                        tab.text = "Information"
                         tab.setIcon(R.drawable.ic_baseline_list_24)
                     }
                     1 -> {
-                        tab.text = "Method"
+                        tab.text = "Ingredients"
                         tab.setIcon(R.drawable.ic_baseline_restaurant_menu_24)
 
                     }
                     2 -> {
-                        tab.text = "Notes"
-                        tab.setIcon(R.drawable.ic_baseline_note_add_24)
+                        tab.text = "Photo"
+                        tab.setIcon(R.drawable.ic_baseline_photo_camera_24)
                     }
 
                 }
@@ -149,14 +149,6 @@ class AddRecipePage : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setSpinnerAdapter(spinner: Spinner){
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.diet,
-            android.R.layout.simple_spinner_item
-        ).also { arrayAdapter -> arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = arrayAdapter}
-    }
 
     private fun signOut(){
         try {
