@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.lang.Exception
 
-class RecipeHomePage : AppCompatActivity() {
+class RecipeHomePage : AppCompatActivity(), CellClickListener {
 
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
     private val img = arrayOf(R.drawable.burger,R.drawable.pizza,R.drawable.pancakes,
@@ -40,7 +40,7 @@ class RecipeHomePage : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_recipe)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecipeAdapter(img,texts,descs)
+        recyclerView.adapter = RecipeAdapter(img,texts,descs, this)
 
     }
 
@@ -91,6 +91,12 @@ class RecipeHomePage : AppCompatActivity() {
 
     private fun redirectRecipePage(){
         val intent = Intent(this, AddRecipePage::class.java)
+        startActivity(intent)
+    }
+
+
+    override fun onCellClickListener() {
+        val intent = Intent(this, IngredientMethodActivity::class.java)
         startActivity(intent)
     }
 

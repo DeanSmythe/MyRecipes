@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.myrecipes.CellClickListener
 import com.example.myrecipes.R
 
-class RecipeAdapter(val img:Array<Int>,val text:Array<String>, val desc:Array<String>):RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(val img:Array<Int>,val text:Array<String>,
+                    val desc:Array<String>, private val cellClickListener: CellClickListener)
+                    :RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item, parent, false)
@@ -30,7 +33,11 @@ class RecipeAdapter(val img:Array<Int>,val text:Array<String>, val desc:Array<St
     }
 
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-            with(holder) { bindValue(img[position],text[position],desc[position]) }
+            with(holder) { bindValue(img[position],text[position],desc[position])
+            holder.itemView.setOnClickListener{
+                cellClickListener.onCellClickListener()
+            }
+            }
         }
 
 
