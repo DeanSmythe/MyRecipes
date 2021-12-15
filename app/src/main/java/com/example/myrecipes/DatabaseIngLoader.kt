@@ -87,7 +87,7 @@ class DatabaseIngLoader {
                     )
                     document.reference.delete()
                 }
-                Log.println(Log.WARN, "", "Leaving delete function")
+                Log.println(Log.WARN, "", "Leaving delete ingredient function")
             }
     }
 
