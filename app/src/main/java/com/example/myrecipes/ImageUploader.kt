@@ -1,10 +1,14 @@
 package com.example.myrecipes
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myrecipes.data.Image
 import com.example.myrecipes.data.ImageDatabaseHandler
@@ -13,8 +17,8 @@ import com.squareup.picasso.Picasso
 import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
-class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
-    private val localRepository: LocalRepository = LocalRepository()
+class ImageUploader : AppCompatActivity() {
+    private var localRepository: LocalRepository = LocalRepository()
     private var chooseImageButton: Button? = null
     private var chooseLocalImageButton: Button? = null
     private var uploadImageButton: Button? = null
@@ -51,11 +55,10 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
     }
 
     private fun chooseLocalButtonHandle() {
-        Log.i("test:", "choose local image button clicked")
         chooseLocalImageButton = findViewById(R.id.chooseLocalImageButton)
         chooseLocalImageButton?.setOnClickListener {
-            val imageLocalHandler = ImageLocalHandler(this)
-            imageLocalHandler.onPickPhoto()
+            Log.i("test:", "choose local image button clicked")
+            openActivity()
         }
     }
 
@@ -101,17 +104,27 @@ class ImageUploader : AppCompatActivity(), ActivityNavigationHandler {
         localRepository.currentImage = image
     }
 
-    override fun openActivity() {
-        imageUploaderNavigationHandler.openActivity()
-    }
-
-    override fun finishActivity() {
-        imageUploaderNavigationHandler.finishActivity()
-    }
-
-     fun loadImage(selectedImage: Bitmap?) {
+    fun loadImage(selectedImage: Bitmap?) {
         val ivPreview: ImageView = findViewById(R.id.uploadImageView) as ImageView
         ivPreview.setImageBitmap(selectedImage)
     }
 
+
+    fun openActivity() {
+        val intent = Intent(
+            Intent.ACTION_PICK,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        )
+        launchSomeActivity.launch(intent)
+
+
+    }
+
+    private var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result != null && result.resultCode == Activity.RESULT_OK) {
+            val data = result.data?.data
+            Picasso.with(this).load(data).into(uploadImageView)
+            localRepository.currentImage?.let { displayChosenImage(it) }
+        }
+    }
 }
