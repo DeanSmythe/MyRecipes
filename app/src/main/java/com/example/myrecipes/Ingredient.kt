@@ -17,14 +17,10 @@ data class Ingredient(
     val picture: String? = null
 ) {
 
-    private val db: FirebaseFirestore
-
-    init {
-        db = setDb(TRUE)
-    }
 
     fun writeNewIngredient(name: String, description: String, uom: String, picture: String) {
         val ingredient = Ingredient(name, description, uom, picture)
+        val db = Firebase.firestore
         db.collection("ingredients").add(ingredient)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
