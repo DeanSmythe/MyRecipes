@@ -10,6 +10,15 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="toast">\"Please enter your email\"</string>
+    <string name="choose_image">CHOOSE IMAGE</string>
+    <string name="submit">SUBMIT</string>
+    <string name="upload_image">UPLOAD</string>
+    <string name="image">Image</string>
+    <string name="download">DOWNLOAD</string>
+    <string name="choose_local_image">CHOOSE LOCAL IMAGE</string>
+    <string name="name">Name:</string>
+    <string name="url">URL:</string>
+    <string name="upload_view">UPLOAD VIEW</string>
 
     <string-array name="ingredients">
         <item>Eggs</item>

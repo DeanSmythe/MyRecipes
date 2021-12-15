@@ -48,18 +48,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun signIn(){
-        val password : String = findViewById<TextView>(R.id.password).text.toString().trim()
-        val username : String = findViewById<TextView>(R.id.email).text.toString().trim()
+    private fun signIn() {
+        val password: String = findViewById<TextView>(R.id.password).text.toString().trim()
+        val username: String = findViewById<TextView>(R.id.email).text.toString().trim()
         Log.d("tag", password)
         Log.d("tag", username)
-        firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
-            if (task.isSuccessful){
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
                 val intent = Intent(this, RecipeHomePage::class.java)
                 startActivity(intent)
                 finish()
-            }else{
-                Toast.makeText(this@MainActivity,"Sign-In Incorrect", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "Sign-In Incorrect", Toast.LENGTH_SHORT).show()
             }
         }
     }
