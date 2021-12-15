@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
 
+//        DatabaseIngLoader().emptyIngredients()
+
         DatabaseIngLoader().loadDefaultIngToDb()
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)

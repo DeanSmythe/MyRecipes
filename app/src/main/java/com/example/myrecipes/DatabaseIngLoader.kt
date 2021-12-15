@@ -52,9 +52,9 @@ class DatabaseIngLoader {
                 "picture" to ingredient.picture
             )
 
-            db.collection("ingredients").document("${ingredient.name}").get()
-                .addOnCompleteListener { docSnapshot ->
-                    if (docSnapshot.result.exists().not()) {
+            db.collection("ingredients").whereEqualTo("name", "${ingredient.name}").get()
+                .addOnSuccessListener { docSnapshot ->
+                    if (docSnapshot.isEmpty) {
                         db.collection("ingredients").add(ingredientData)
                             .addOnSuccessListener { documentReference ->
                                 Log.d(
@@ -65,8 +65,11 @@ class DatabaseIngLoader {
                             .addOnFailureListener { error ->
                                 Log.w(ContentValues.TAG, "Error adding document", error)
                             }
+                    } else {
+                        Log.d("", "Ingredient already exists")
                     }
                 }
+                .addOnFailureListener() { TODO()}
         }
     }
 
