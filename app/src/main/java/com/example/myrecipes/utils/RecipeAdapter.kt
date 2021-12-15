@@ -3,7 +3,6 @@ package com.example.myrecipes.utils
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -35,9 +34,8 @@ class RecipeAdapter(val img:Array<Int>,val text:Array<String>,
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             with(holder) { bindValue(img[position],text[position],desc[position])
             holder.itemView.setOnClickListener{
-                val recipeDatebaseHandler=RecipeDatebaseHandler()
+                val recipeDatebaseHandler=RecipeDatebaseHandler(cellClickListener)
                 recipeDatebaseHandler.getData(text[position])
-                cellClickListener.onCellClickListener()
             }
             }
         }

@@ -94,9 +94,14 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         startActivity(intent)
     }
 
-
     override fun onCellClickListener() {
+        TODO("Not yet implemented")
+    }
+
+
+    override fun onCellClickListener(recipeDetails:String) {
         val intent = Intent(this, IngredientMethodActivity::class.java)
+        intent.putExtra("recipe_details",recipeDetails)
         startActivity(intent)
     }
 

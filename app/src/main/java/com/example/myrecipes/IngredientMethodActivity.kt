@@ -18,6 +18,9 @@ class IngredientMethodActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingredients_method_page)
+        val recipeDetails = intent.getStringExtra("recipe_details")
+        val detailsTextView = findViewById<TextView>(R.id.recipeDetailsTextView)
+        detailsTextView.text = recipeDetails
 
         // Tabs Customization
         tab_layout.setSelectedTabIndicatorColor(Color.WHITE)
@@ -69,10 +72,10 @@ class IngredientMethodActivity : AppCompatActivity() {
             }
             // Change color of the icons
             tab.icon?.colorFilter =
-                    BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                            Color.WHITE,
-                            BlendModeCompat.SRC_ATOP
-                    )
+                BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                    Color.WHITE,
+                    BlendModeCompat.SRC_ATOP
+                )
         }.attach()
 
 
