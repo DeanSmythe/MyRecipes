@@ -93,13 +93,16 @@ class ImageUploader : AppCompatActivity() {
         downloadImageButton = findViewById(R.id.downloadImageButton)
         downloadImageButton?.setOnClickListener {
             Log.i("test:", "download image button clicked")
+            fetchImage()
+        }
+    }
 
-            val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
-            val imageName = imageNameEditText?.text
-            if (imageName != null) {
-                if (imageName.isNotBlank()) {
-                    imageDatabaseHandler.findUrl(imageName.toString())
-                }
+    private fun fetchImage() {
+        val imageDatabaseHandler = ImageDatabaseHandler(localRepository, imageUploaderNavigationHandler, this)
+        val imageName = imageNameEditText?.text
+        if (imageName != null) {
+            if (imageName.isNotBlank()) {
+                imageDatabaseHandler.findUrl(imageName.toString())
             }
         }
     }
@@ -109,17 +112,19 @@ class ImageUploader : AppCompatActivity() {
     }
 
     fun displayChosenImage(currentImage: Image) {
-        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
+//        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
         imageNameEditText?.setText(currentImage.imageName, TextView.BufferType.EDITABLE)
         imageUrlEditText.setText(currentImage.imageUrl, TextView.BufferType.NORMAL)
+        fetchImage()
     }
 
     fun resultedUrl(image: Image) {
-        if (image != null && image.imageUrl != null && image.imageUrl != "") {
+        if (image.imageUrl != null && image.imageUrl != "") {
             val imageStorageHandler = ImageStorageHandler(this)
-            image.imageUrl?.let { imageStorageHandler.getImage(it) }
-            imageUrlEditText?.setText(image.imageUrl, TextView.BufferType.EDITABLE)
+            image.imageUrl.let { imageStorageHandler.getImage(it) }
+            imageUrlEditText.setText(image.imageUrl, TextView.BufferType.EDITABLE)
             localRepository.currentImage = image
+            Picasso.with(this).load(image.imageUrl).into(uploadImageView)
         }
     }
 
@@ -135,14 +140,12 @@ class ImageUploader : AppCompatActivity() {
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
         launchSomeActivity.launch(intent)
-
-
     }
 
     private var launchSomeActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result != null && result.resultCode == Activity.RESULT_OK) {
             val data = result.data?.data
-            val path = data?.path
+            data?.path
 
             Picasso.with(this).load(data).into(uploadImageView)
             imageNameEditText?.setText("", TextView.BufferType.NORMAL)
