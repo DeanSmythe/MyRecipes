@@ -27,9 +27,8 @@ class MainActivity : AppCompatActivity() {
         val db = Firebase.firestore
 
 //        DatabaseIngLoader().emptyIngredients()
-        DatabaseRecipeLoader().emptyRecipes()
-        DatabaseIngLoader().loadDefaultIngToDb()
-        DatabaseRecipeLoader().loadDefaultRecipeToDb()
+//        DatabaseRecipeLoader().emptyRecipes()
+//        DatabaseRecipeIngLoader().emptyRecipeIng()
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {
@@ -41,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             signIn()
         }
+
+        DatabaseIngLoader().loadDefaultIngToDb()
+        DatabaseRecipeLoader().loadDefaultRecipeToDb()
+        DatabaseRecipeIngLoader().loadDefaultRecipeIng()
     }
 
     private fun signIn() {
