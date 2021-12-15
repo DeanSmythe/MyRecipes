@@ -24,7 +24,7 @@ class ImageUploader : AppCompatActivity() {
     private var uploadImageButton: Button? = null
     private var downloadImageButton: Button? = null
     private var imageNameEditText: EditText? = null
-    private var imageUrlEditText: EditText? = null
+    private lateinit var imageUrlEditText: EditText
     var uploadImageView: ImageView? = null
     private var uploadProgressBar: ProgressBar? = null
     private var uploadsTextView: TextView? = null
@@ -43,6 +43,7 @@ class ImageUploader : AppCompatActivity() {
         uploadsTextView = findViewById(R.id.uploadsTextView)
         imageNameEditText = findViewById(R.id.imageNameEditText)
         imageUrlEditText = findViewById(R.id.imageUrlEditText)
+        imageUrlEditText.isEnabled = false
     }
 
     private fun chooseButtonHandle() {
@@ -94,14 +95,16 @@ class ImageUploader : AppCompatActivity() {
     fun displayChosenImage(currentImage: Image) {
         Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
         imageNameEditText?.setText(currentImage.imageName, TextView.BufferType.EDITABLE)
-        imageUrlEditText?.setText(currentImage.imageUrl, TextView.BufferType.EDITABLE)
+        imageUrlEditText?.setText(currentImage.imageUrl, TextView.BufferType.NORMAL)
     }
 
     fun resultedUrl(image: Image) {
-        val imageStorageHandler = ImageStorageHandler(this)
-        image.imageUrl?.let { imageStorageHandler.getImage(it) }
-        imageUrlEditText?.setText(image.imageUrl, TextView.BufferType.EDITABLE)
-        localRepository.currentImage = image
+        if (image != null && image.imageUrl != null && image.imageUrl != "") {
+            val imageStorageHandler = ImageStorageHandler(this)
+            image.imageUrl?.let { imageStorageHandler.getImage(it) }
+            imageUrlEditText?.setText(image.imageUrl, TextView.BufferType.EDITABLE)
+            localRepository.currentImage = image
+        }
     }
 
     fun loadImage(selectedImage: Bitmap?) {

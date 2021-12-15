@@ -22,7 +22,6 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
                 Log.d(ContentValues.TAG, "Added Image ID: ${documentReference.id}")
 
 
-
             }
             .addOnFailureListener { error ->
                 Log.w(ContentValues.TAG, "Error adding document", error)
@@ -66,7 +65,9 @@ class ImageDatabaseHandler(val localRepository: LocalRepository, private val ima
                     val image = packetiseImage(document)
                     images.add(image)
                 }
-                imageUploader.resultedUrl(images.first())
+                if (images.isNotEmpty()) {
+                    imageUploader.resultedUrl(images.first())
+                }
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
