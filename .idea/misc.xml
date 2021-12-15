@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.165" />
         <entry key="app/src/main/res/layout/db_loader.xml" value="0.335" />
         <entry key="app/src/main/res/layout/ingredient_item.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/ingredients_method.xml" value="0.17527173913043478" />
         <entry key="app/src/main/res/layout/recipe_item.xml" value="0.18931159420289856" />
         <entry key="app/src/main/res/menu/account_menu.xml" value="0.25" />
       </map>
@@ -29,5 +30,8 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>
