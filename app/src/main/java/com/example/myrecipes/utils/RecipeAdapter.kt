@@ -35,6 +35,8 @@ class RecipeAdapter(val img:Array<Int>,val text:Array<String>,
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
             with(holder) { bindValue(img[position],text[position],desc[position])
             holder.itemView.setOnClickListener{
+                val recipeDatebaseHandler=RecipeDatebaseHandler()
+                recipeDatebaseHandler.getData(text[position])
                 cellClickListener.onCellClickListener()
             }
             }
