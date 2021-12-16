@@ -19,6 +19,11 @@
     <string name="name">Name:</string>
     <string name="url">URL:</string>
     <string name="upload_view">UPLOAD VIEW</string>
+    <string name="store_ingredient">Store ingredient</string>
+    <string name="upload_image_btn_text">Upload Image</string>
+    <string name="ingredient_description">Ingredient Description</string>
+    <string name="ingredient_name">Ingredient Name</string>
+    <string name="picked_image">Picked Image</string>
 
     <string-array name="ingredients">
         <item>Eggs</item>

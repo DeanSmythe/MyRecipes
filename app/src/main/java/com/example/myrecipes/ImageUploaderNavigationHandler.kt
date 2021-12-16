@@ -12,15 +12,11 @@ class ImageUploaderNavigationHandler(private val imageUploader: ImageUploader, p
         launchSomeActivity.launch(intent)
     }
 
-    fun finishActivity() {
-    }
-
     private var launchSomeActivity = imageUploader.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result != null && result.resultCode == Activity.RESULT_OK) {
             val data = result.data?.getParcelableExtra<LocalRepository>("returnLocalRepository")
             if (data != null) {
                 localRepository = data
-//                Picasso.with(imageUploader).load(localRepository.currentImage?.imageUrl).into(imageUploader.uploadImageView)
                 localRepository.currentImage?.let { imageUploader.displayChosenImage(it) }
             }
         }
