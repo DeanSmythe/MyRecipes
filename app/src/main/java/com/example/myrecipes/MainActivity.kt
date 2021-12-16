@@ -24,17 +24,11 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar_login)
         setSupportActionBar(toolbar)
 
-//        firebaseAuth.useEmulator("10.0.2.2", 9099)
-
         val db = Firebase.firestore
-//        if (TRUE) {
-//            val settings = FirebaseFirestoreSettings.Builder()
-//                .setHost("10.0.2.2:8080")
-//                .setPersistenceEnabled(false)
-//                .setSslEnabled(false)
-//                .build()
-//            db.firestoreSettings = settings
-//        }
+
+//        DatabaseIngLoader().emptyIngredients()
+//        DatabaseRecipeLoader().emptyRecipes()
+//        DatabaseRecipeIngLoader().emptyRecipeIng()
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {
@@ -46,20 +40,24 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             signIn()
         }
+
+        DatabaseIngLoader().loadDefaultIngToDb()
+        DatabaseRecipeLoader().loadDefaultRecipeToDb()
+        DatabaseRecipeIngLoader().loadDefaultRecipeIng()
     }
 
-    private fun signIn(){
-        val password : String = findViewById<TextView>(R.id.password).text.toString().trim()
-        val username : String = findViewById<TextView>(R.id.email).text.toString().trim()
+    private fun signIn() {
+        val password: String = findViewById<TextView>(R.id.password).text.toString().trim()
+        val username: String = findViewById<TextView>(R.id.email).text.toString().trim()
         Log.d("tag", password)
         Log.d("tag", username)
-        firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener { task ->
-            if (task.isSuccessful){
-                val intent = Intent(this, RecipeHomePage::class.java)
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val intent = Intent(this, IngredientAdder::class.java)
                 startActivity(intent)
                 finish()
-            }else{
-                Toast.makeText(this@MainActivity,"Sign-In Incorrect", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@MainActivity, "Sign-In Incorrect", Toast.LENGTH_SHORT).show()
             }
         }
     }

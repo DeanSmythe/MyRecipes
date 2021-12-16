@@ -22,17 +22,17 @@ class IngredientsMethodTabs(fm: FragmentManager, lifecycle: Lifecycle, private v
                 // # Recipe Fragment
                 val bundle = Bundle()
                 bundle.putString("fragmentName", "Recipes Fragment")
-                val moviesFragment = IngredientMethodFragment()
-                moviesFragment.arguments = bundle
-                return moviesFragment
+                val recipesFragment = IngredientMethodFragment()
+                recipesFragment.arguments = bundle
+                return recipesFragment
             }
             2 -> {
                 // # Notes
                 val bundle = Bundle()
                 bundle.putString("fragmentName", "Notes Fragment")
-                val booksFragment = IngredientMethodFragment()
-                booksFragment.arguments = bundle
-                return booksFragment
+                val notesFragment = IngredientMethodFragment()
+                notesFragment.arguments = bundle
+                return notesFragment
             }
             else -> return IngredientMethodFragment()
         }
