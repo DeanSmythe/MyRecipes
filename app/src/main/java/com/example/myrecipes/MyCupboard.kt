@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myrecipes.utils.FirebaseUtils
@@ -22,6 +21,7 @@ class MyCupboard : AppCompatActivity() {
     private var uomList = mutableListOf<String>()
     private lateinit var spinner: Spinner
     private lateinit var spinnerUom: Spinner
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -37,9 +37,9 @@ class MyCupboard : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.account_menu, menu)
-        var currentUser = menu?.findItem(R.id.itmLoggedInAs)
+        val currentUser = menu?.findItem(R.id.itmLoggedInAs)
         currentUser?.setTitle(setUsername())
-        var recipePage = menu?.findItem(R.id.itmMyCupboard)
+        val recipePage = menu?.findItem(R.id.itmMyCupboard)
         recipePage?.setTitle("Recipe page")
         return super.onCreateOptionsMenu(menu)
     }
@@ -68,7 +68,6 @@ class MyCupboard : AppCompatActivity() {
     }
 
     private fun populateIngredients() {
-        var db = Firebase.firestore
         db.collection("ingredients").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -82,7 +81,6 @@ class MyCupboard : AppCompatActivity() {
     }
 
     private fun populateUom() {
-        var db = Firebase.firestore
         db.collection("uom").get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -109,7 +107,7 @@ class MyCupboard : AppCompatActivity() {
         listOfIngredients.adapter = ingredientAdapter
         listOfIngredients.layoutManager = LinearLayoutManager(this)
 
-        setUpDbAndPopulateCupboard(listOfIngredients)
+        setUpDbAndPopulateCupboard()
 
         val addIngredients = findViewById<Button>(R.id.btnAddIngredient)
         addIngredients.setOnClickListener {
@@ -125,23 +123,22 @@ class MyCupboard : AppCompatActivity() {
                 )
                 ingredientAdapter.addNewIngredient(ingredient)
                 findViewById<EditText>(R.id.etIngredientQuantity).setText("")
+//                ingredient.writeNewIngredient(ingredient)
             }
         }
     }
 
-    private fun setUpDbAndPopulateCupboard(listOfIngredients: RecyclerView) {
+    private fun setUpDbAndPopulateCupboard() {
         val email = FirebaseUtils.firebaseAuth.currentUser?.email
-        var db = Firebase.firestore
-        val dbGetUser = db.collection("email").document(email!!).collection("MyCupboard").get()
+        db.collection("email").document(email!!).collection("MyCupboard").get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(ContentValues.TAG, document.data.get("Uom").toString())
-                    var ingredient = Ingredient(
+                    val ingredient = Ingredient(
                         name = document.id,
-                        description = document.data.get("Amount")
-                            .toString(),
+                        description = document.data.get("Amount").toString(),
                         uom = document.data.get("Uom").toString(),
-                        picture = findImage(ingredient = document.id)
+                        picture = document.data.get("picture").toString()
                     )
                     ingredientAdapter.populateRecyclerView(ingredient)
                 }
@@ -152,7 +149,6 @@ class MyCupboard : AppCompatActivity() {
         val user = FirebaseUtils.firebaseAuth.currentUser?.email
         if (user != null) {
             Log.d("tag", user)
-            val username = user
             return "Signed in as: " + user
         }
         return "Error finding user"
@@ -166,7 +162,6 @@ class MyCupboard : AppCompatActivity() {
         } catch (e: Exception) {
             Toast.makeText(this@MyCupboard, "Sign out Error", Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun recipePage() {
