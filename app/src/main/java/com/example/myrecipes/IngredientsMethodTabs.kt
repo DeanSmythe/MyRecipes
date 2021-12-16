@@ -30,7 +30,7 @@ class IngredientsMethodTabs(fm: FragmentManager, lifecycle: Lifecycle, private v
                 // # Notes
                 val bundle = Bundle()
                 bundle.putString("fragmentName", "Notes Fragment")
-                val notesFragment = IngredientMethodFragment()
+                val notesFragment = FragmentNotesRecipeCard()
                 notesFragment.arguments = bundle
                 return notesFragment
             }
