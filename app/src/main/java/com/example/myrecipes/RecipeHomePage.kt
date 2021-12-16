@@ -157,4 +157,6 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         val intent = Intent(this, IngredientAdder::class.java)
         startActivity(intent)
     }
+
+
 }
