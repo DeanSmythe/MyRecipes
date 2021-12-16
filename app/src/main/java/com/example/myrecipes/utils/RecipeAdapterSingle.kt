@@ -1,5 +1,6 @@
 package com.example.myrecipes.utils
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,10 @@ import com.example.myrecipes.CellClickListener
 import com.example.myrecipes.IngredientItemAdapter
 import com.example.myrecipes.R
 import com.example.myrecipes.Recipe
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.image_item.view.*
 
 class RecipeAdapterSingle(private val recipes: MutableList<Recipe>, private val cellClickListener: CellClickListener) : RecyclerView.Adapter<RecipeAdapterSingle.RecipeViewHolder>() {
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -37,9 +41,16 @@ class RecipeAdapterSingle(private val recipes: MutableList<Recipe>, private val 
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val currentRecipe = recipes[position]
+        val storage = Firebase.storage
+        val storageRef = storage.reference
         holder.itemView.apply {
-           val image = findViewById<ImageView>(R.id.imageView)
-            Picasso.with(context).load(currentRecipe.picture).into(image)
+           val imageHolder = findViewById<ImageView>(R.id.imageView)
+            storageRef.child(currentRecipe.picture!!).downloadUrl.addOnSuccessListener {
+                Picasso.with(context).load(it).into(imageHolder)
+            }.addOnFailureListener {
+                Log.i("ImageDownloader:", "unable to get Image")
+            }
+//            Picasso.with(context).load(currentRecipe.picture).into(imageHolder)
            val txt1 = findViewById<TextView>(R.id.txt1)
             txt1.setText(currentRecipe.name)
            val txt2 = findViewById<TextView>(R.id.txt2)
