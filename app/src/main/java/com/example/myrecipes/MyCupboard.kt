@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
-import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myrecipes.utils.FirebaseUtils
@@ -78,7 +77,7 @@ class MyCupboard : AppCompatActivity() {
     }
 
     private fun setUpRecyclerAndCards(){
-        val listOfIngredients = findViewById<RecyclerView>(R.id.rvListOfIngredients)
+        val listOfIngredients = findViewById<RecyclerView>(R.id.rvListOfIngredientsRecipe)
         listOfIngredients.adapter = ingredientAdapter
         listOfIngredients.layoutManager = LinearLayoutManager(this)
 

@@ -59,7 +59,14 @@ class IngredientItemAdapter (
     fun addNewIngredient(ingredient: Ingredient){
         updateDb(ingredient)
         Log.d("remove duplicates =",ingredient.name.toString())
-        removeDuplicates(comparitor = ingredient.name.toString())
+        if (ingredients.size > 0 ){
+        removeDuplicates(comparitor = ingredient.name.toString())}
+        ingredients.add(ingredient)
+        notifyItemInserted(ingredients.size - 1)
+    }
+
+    fun addNewIngredientRecipe(ingredient: Ingredient){
+        updateDbRecipe(ingredient)
         ingredients.add(ingredient)
         notifyItemInserted(ingredients.size - 1)
     }
@@ -73,6 +80,18 @@ class IngredientItemAdapter (
         var emailDataBaseUpdater = UsersEmailDbHandler()
         emailDataBaseUpdater.newCupboardItem(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!)
     }
+
+    fun updateDbRecipe(ingredient: Ingredient){
+        var recipeAdapter = RecipeDbHandler()
+        recipeAdapter.setIngredientsRecipe(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!, RecipeName = ingredient.recipeName!!)
+//        updaterRecipesDb(ingredient)
+    }
+
+//    fun updaterRecipesDb(ingredient: Ingredient){
+//        var recipeAdapter = RecipeDbHandler()
+//        recipeAdapter.setRecipe(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!, RecipeName = ingredient.recipeName!!)
+//
+//    }
     override fun getItemCount(): Int {
         return ingredients.size
     }

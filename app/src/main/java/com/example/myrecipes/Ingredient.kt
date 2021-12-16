@@ -14,11 +14,12 @@ data class Ingredient(
     val name: String? = null,
     val description: String? = null,
     val uom: String? = null,
-    val picture: String? = null
+    val picture: String? = null,
+    val recipeName: String? = null
 ) {
 
 
-    fun writeNewIngredient(name: String, description: String, uom: String, picture: String) {
+    fun writeNewIngredient(name: String, description: String, uom: String, picture: String, recipeName: String? = null) {
         val ingredient = Ingredient(name, description, uom, picture)
         val db = Firebase.firestore
         db.collection("ingredients").add(ingredient)

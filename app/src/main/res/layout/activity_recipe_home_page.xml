@@ -16,7 +16,7 @@
     android:layout_height="50dp"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    android:backgroundTint="#CCCCCC"
+    android:backgroundTint="@color/design_default_color_primary_dark"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_scrollFlags="scroll|enterAlways"

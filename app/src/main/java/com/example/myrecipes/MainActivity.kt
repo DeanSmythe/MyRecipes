@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {
-            val intent = Intent(this, RegisterPage::class.java)
+            val intent = Intent(this, RecipeHomePage::class.java)
             startActivity(intent)
         }
 
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("tag", username)
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val intent = Intent(this, IngredientAdder::class.java)
+                val intent = Intent(this, RecipeHomePage::class.java)
                 startActivity(intent)
                 finish()
             } else {

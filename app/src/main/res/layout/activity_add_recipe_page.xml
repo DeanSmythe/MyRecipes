@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_AddRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,65 +19,35 @@
         app:title="Create a recipe"
         app:titleTextColor="#000000" />
 
-    <EditText
-        android:id="@+id/etRecipeName"
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_addrecipe"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Recipe name"
-        android:layout_marginTop="16dp"
+        android:background="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_AddRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_AddRecipe"
+        app:tabMaxWidth="0dp"
+        app:tabTextAppearance="?android:attr/textAppearanceMedium"
+        app:textAllCaps="false" />
 
-    <EditText
-        android:id="@+id/etRecipeDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Recipe Description"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/tabs_viewpager_addrecipe"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etRecipeName" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_addrecipe" />
 
-    <EditText
-        android:id="@+id/etTimeToMake"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Time to make"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etRecipeDesc" />
-
-    <Button
-        android:id="@+id/btnUploadImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Image"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar_AddRecipe"
-        app:layout_constraintStart_toEndOf="@+id/btnRecipeSubmit"
-        app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
-
-    <Button
-        android:id="@+id/btnRecipeSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit Recipe"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
-        app:layout_constraintStart_toStartOf="@+id/toolbar_AddRecipe"
-        app:layout_constraintTop_toBottomOf="@+id/spDietSpinner" />
-
-    <Spinner
-        android:id="@+id/spDietSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etTimeToMake"
+    <FrameLayout
+        android:id="@+id/frgRecipeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_addrecipe"
+        
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
