@@ -8,23 +8,28 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myrecipes.utils.FirebaseUtils
 import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
 import com.example.myrecipes.utils.RecipeAdapter
+import com.example.myrecipes.utils.RecipeAdapterSingle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_recipe_add_ingredients.*
 import java.lang.Exception
 
 class RecipeHomePage : AppCompatActivity(), CellClickListener {
 
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var adapter : RecipeAdapterSingle
     private val img = arrayOf(R.drawable.burger,R.drawable.pizza,R.drawable.pancakes,
         R.drawable.frenchtoast,R.drawable.meatballs, R.drawable.tacos,R.drawable.tomato_mozerella)
     private val texts = arrayOf("Charbroiled Steak Burger", "Pizza Milano", "Breakfast Pancakes", "French Toast",
@@ -36,12 +41,55 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_home_page)
         setSupportActionBar(findViewById(R.id.toolbar))
+        adapter = RecipeAdapterSingle(mutableListOf())
         setUsername()
+        getRecipes()
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_recipe)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecipeAdapter(img,texts,descs, this)
 
+        recyclerView.adapter = adapter
+
+    }
+
+//    private fun getRecipes() {
+//        var db = Firebase.firestore
+//        val dbGetUser = db.collection("recipes").get().addOnSuccessListener { emails ->
+//            for (email in emails ){
+//                Log.d("All Recipes?",email.id.toString())
+//                val users = db.collection("recipes").document(email.id).collection("Ingredients").get().addOnSuccessListener { items ->
+//                    for (email in items ){
+//                        Log.d("get ingredients?","reaching this point")
+//                        Log.d("get ingredients?",email.data.get("Ingredient").toString())
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+    private fun getRecipes() {
+        var db = Firebase.firestore
+        val dbGetUser = db.collection("email").get().addOnSuccessListener { emails ->
+            for (email in emails ){
+                Log.d("All Recipes?",email.id.toString())
+                val emailId = email.id
+                val users = db.collection("recipe").document(email.id).collection("MyRecipes").get().addOnSuccessListener { items ->
+                    for (email in items ){
+                        Log.d("get ingredients?","reaching this point")
+                        Log.d("get ingredients?",email.data.get("Recipe").toString())
+                        val recipe = email.data.get("Recipe").toString()
+                        db.collection("recipe").document(emailId).collection("MyRecipes").document(recipe).collection("Ingredients")
+                            .get().addOnSuccessListener { recipes ->
+                                for (recipe in recipes){
+                                    Log.d("get ingredient!?","reaching this point 2")
+                                    Log.d("get ingredient!?",recipe.id.toString())
+                                    setUpAdapter(email.data.get("Picture").toString(), email.data.get("RecipeInstructions").toString(), email.data.get("Recipe").toString(), email.data.get("TimeToMake").toString())
+                                }
+                            }
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,6 +108,11 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun setUpAdapter(img: String, texts: String, desc: String, timeToMake: String){
+        val recipe = Recipe(picture = img,name = desc, timetomake = timeToMake.toInt(), description = texts)
+        adapter.addNewRecipe(recipe)
+            }
 
 
 

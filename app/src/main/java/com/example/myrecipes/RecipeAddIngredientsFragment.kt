@@ -37,7 +37,7 @@ class RecipeAddIngredientsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         ingredientAdapter = IngredientItemAdapter(mutableListOf())
 
-        setUpRecyclerAndCards()
+        populateEtViewAndUpdateDb()
 
         val spinner = spinnerIngredients
         val spinnerUom = spinneruom
@@ -74,7 +74,7 @@ class RecipeAddIngredientsFragment : Fragment() {
         return map.entries.find { it.value == ingredient }?.key
     }
 
-    private fun setUpRecyclerAndCards() {
+    private fun populateEtViewAndUpdateDb() {
         ingredientAdapter = IngredientItemAdapter(mutableListOf())
         val listOfIngredients = rvListOfIngredientsForRecipe
         listOfIngredients.adapter = ingredientAdapter

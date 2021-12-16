@@ -83,7 +83,14 @@ class IngredientItemAdapter (
     fun updateDbRecipe(ingredient: Ingredient){
         var recipeAdapter = RecipeDbHandler()
         recipeAdapter.setIngredientsRecipe(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!, RecipeName = ingredient.recipeName!!)
+//        updaterRecipesDb(ingredient)
     }
+
+//    fun updaterRecipesDb(ingredient: Ingredient){
+//        var recipeAdapter = RecipeDbHandler()
+//        recipeAdapter.setRecipe(ingredient = ingredient.name!!, Amount = ingredient.description!!.toInt(), Uom = ingredient.uom!!, RecipeName = ingredient.recipeName!!)
+//
+//    }
     override fun getItemCount(): Int {
         return ingredients.size
     }

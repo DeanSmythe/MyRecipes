@@ -25,6 +25,14 @@ class RecipeDbHandler {
         )
         val email = FirebaseUtils.firebaseAuth.currentUser?.email
         Log.d(ContentValues.TAG, email!!)
+//        val user = hashMapOf("email" to email)
+//        db.collection("recipe").document(email).set(user).addOnSuccessListener{ documentReference ->
+//            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID (adding ingredient): ${documentReference}")
+//        }
+//            .addOnFailureListener { e ->
+//                Log.w(ContentValues.TAG, "Error adding document", e)
+//            }
+
         val dbGetUser = db.collection("recipe").document(email!!).collection("MyRecipes").document(RecipeName)
         dbGetUser.set(ingredientDetails)
             .addOnSuccessListener { documentReference ->
@@ -54,6 +62,29 @@ class RecipeDbHandler {
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
+    }
+
+    fun setRecipe(ingredient: String, Amount: Int, Uom: String, RecipeName: String){
+        val ingredientAddDetails = hashMapOf(
+            "Ingredient" to ingredient,
+            "Amount" to Amount,
+            "Uom" to Uom
+        )
+        val email = FirebaseUtils.firebaseAuth.currentUser?.email
+        Log.d(ContentValues.TAG, email!!)
+        val dbGetUserIngredient =
+            db.collection("recipes").document(RecipeName).collection("Ingredients").document(ingredient)
+        dbGetUserIngredient.set(ingredientAddDetails)
+            .addOnSuccessListener { documentReference ->
+                Log.d(
+                    ContentValues.TAG,
+                    "DocumentSnapshot added with ID (adding ingredient): ${documentReference}"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error adding document", e)
+            }
+
     }
 //
 //    fun getLastRecipe(){
