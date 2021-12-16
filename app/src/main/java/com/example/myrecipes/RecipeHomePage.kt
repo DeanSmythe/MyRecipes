@@ -41,7 +41,8 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_home_page)
         setSupportActionBar(findViewById(R.id.toolbar))
-        adapter = RecipeAdapterSingle(mutableListOf())
+        val clickListener = onCellClickListener()
+        adapter = RecipeAdapterSingle(mutableListOf(), cellClickListener = clickListener)
         setUsername()
         getRecipes()
 

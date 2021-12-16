@@ -13,7 +13,7 @@ import com.example.myrecipes.R
 import com.example.myrecipes.Recipe
 import com.squareup.picasso.Picasso
 
-class RecipeAdapterSingle(private val recipes: MutableList<Recipe>) : RecyclerView.Adapter<RecipeAdapterSingle.RecipeViewHolder>() {
+class RecipeAdapterSingle(private val recipes: MutableList<Recipe>, private val cellClickListener: CellClickListener) : RecyclerView.Adapter<RecipeAdapterSingle.RecipeViewHolder>() {
     class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeAdapterSingle.RecipeViewHolder {
@@ -44,6 +44,9 @@ class RecipeAdapterSingle(private val recipes: MutableList<Recipe>) : RecyclerVi
             txt1.setText(currentRecipe.name)
            val txt2 = findViewById<TextView>(R.id.txt2)
             txt2.setText(currentRecipe.description)
+            holder.itemView.setOnClickListener{
+                cellClickListener.onCellClickListener()
+            }
         }
 
     }
