@@ -24,17 +24,11 @@ class MainActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar_login)
         setSupportActionBar(toolbar)
 
-//        firebaseAuth.useEmulator("10.0.2.2", 9099)
-
         val db = Firebase.firestore
-//        if (TRUE) {
-//            val settings = FirebaseFirestoreSettings.Builder()
-//                .setHost("10.0.2.2:8080")
-//                .setPersistenceEnabled(false)
-//                .setSslEnabled(false)
-//                .build()
-//            db.firestoreSettings = settings
-//        }
+
+//        DatabaseIngLoader().emptyIngredients()
+//        DatabaseRecipeLoader().emptyRecipes()
+//        DatabaseRecipeIngLoader().emptyRecipeIng()
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {
@@ -46,6 +40,10 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             signIn()
         }
+
+        DatabaseIngLoader().loadDefaultIngToDb()
+        DatabaseRecipeLoader().loadDefaultRecipeToDb()
+        DatabaseRecipeIngLoader().loadDefaultRecipeIng()
     }
 
     private fun signIn() {
