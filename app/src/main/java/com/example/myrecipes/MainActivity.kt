@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.btnRegisterView)
         registerButton.setOnClickListener {
-            val intent = Intent(this, RegisterPage::class.java)
+            val intent = Intent(this, RecipeHomePage::class.java)
             startActivity(intent)
         }
 
