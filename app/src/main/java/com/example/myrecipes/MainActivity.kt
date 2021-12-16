@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("tag", username)
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val intent = Intent(this, ImageUploader::class.java)
+                val intent = Intent(this, IngredientAdder::class.java)
                 startActivity(intent)
                 finish()
             } else {
