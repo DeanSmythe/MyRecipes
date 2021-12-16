@@ -59,7 +59,8 @@ class IngredientItemAdapter (
     fun addNewIngredient(ingredient: Ingredient){
         updateDb(ingredient)
         Log.d("remove duplicates =",ingredient.name.toString())
-        removeDuplicates(comparitor = ingredient.name.toString())
+        if (ingredients.size > 0 ){
+        removeDuplicates(comparitor = ingredient.name.toString())}
         ingredients.add(ingredient)
         notifyItemInserted(ingredients.size - 1)
     }
