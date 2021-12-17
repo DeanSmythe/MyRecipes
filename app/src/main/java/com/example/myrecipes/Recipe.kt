@@ -1,15 +1,16 @@
 package com.example.myrecipes
 
 import android.content.ContentValues
+import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.IgnoreExtraProperties
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import java.util.*
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import kotlinx.android.parcel.Parcelize
 
 @IgnoreExtraProperties
+@Parcelize
 class Recipe(
     val name: String? = null,
     val description: String? = null,
@@ -17,9 +18,10 @@ class Recipe(
     val picture: String? = null,
     val rating: Int? = null,
     val diet: String? = null
-) {
-
+):Parcelable {
     private val db = Firebase.firestore
+    val recipes = mutableListOf<Recipe>()
+
     var id: String = ""
         get() {
             return field
@@ -42,58 +44,32 @@ class Recipe(
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error adding document", e)
             }
-//            .result.toString()
-//        return id.toString()
     }
 
-//    fun writeRecipe(recipe: Recipe) {
-//        db.collection("recipes").add(recipe)
-//            .addOnSuccessListener { documentReference ->
-//                Log.d(ContentValues.TAG, "DocumentSnapshot Recipe added with ID: ${documentReference.id}")
-//            }
-//            .addOnFailureListener { e ->
-//                Log.w(ContentValues.TAG, "Error adding Recipe document", e)
-//            }
-//    }
-//
-//    fun updateRecipe(recipe: Recipe) {
-//        db.collection("recipes").document(recipe.id)
-//            .update(
-//                mapOf(
-//                    "name" to recipe.name,
-//                    "description" to recipe.description,
-//                    "timetomake" to recipe.timetomake,
-//                    "picture" to recipe.picture,
-//                    "rating" to recipe.rating
-//                )
-//            )
-//    }
-//
-//    fun deleteRecipe(recipe: Recipe) {
-//        db.collection("recipes").document(recipe.id).delete()
-//    }
-//
-//    fun getRecipe(id: String): Recipe? {
-//        val recipeRef = db.collection("recipes").document(id)
-//        return recipeRef.get().result.toObject<Recipe>()
-//    }
-//
-//    fun getRecipeByName(name: String): Recipe? {
-//        val recipeRef = db.collection("recipes").document(name)
-//        return recipeRef.get().result.toObject<Recipe>()
-//    }
-//
-//    fun getAllRecipes(): List<Recipe> {
-//        return db.collection("recipes").get().result.toObjects<Recipe>()
-//    }
-//
-//    fun getRecipesByRating(rating: Int): List<Recipe> {
-//        val recipesOverRating = db.collection("recipes").whereGreaterThanOrEqualTo("Rating", rating)
-//        return recipesOverRating.get().result.toObjects<Recipe>()
-//    }
-//
-//    fun getRecipesByDiet(diet: String): List<Recipe> {
-//        val recipesMatch = db.collection("recipes").whereEqualTo("Diet", diet)
-//        return recipesMatch.get().result.toObjects<Recipe>()
-//    }
+    fun loadRecipes() {
+        db.collection("recipes").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    recipes.add(packetiseRecipe(document))
+                }
+            }
+            .addOnFailureListener { error ->
+                Log.w(ContentValues.TAG, "Error reading document", error)
+            }
+    }
+
+    fun fetchRecipes(): MutableList<Recipe> {
+        return recipes
+    }
+
+    private fun packetiseRecipe(document: QueryDocumentSnapshot): Recipe {
+        return Recipe(
+            document.data["name"].toString(),
+            document.data["description"].toString(),
+            document.data["timetomake"] as Int?,
+            document.data["picture"].toString(),
+            document.data["rating"] as Int?,
+            document.data["diet"].toString(),
+        )
+    }
 }
