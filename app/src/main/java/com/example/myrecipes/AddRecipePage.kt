@@ -91,19 +91,6 @@ class AddRecipePage : AppCompatActivity() {
 
             setCustomTabTitles()
 
-//        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab) {
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab) {
-//
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab) {
-//
-//            }
-//        })
-
     }
 
         private fun setCustomTabTitles() {
@@ -121,9 +108,6 @@ class AddRecipePage : AppCompatActivity() {
 
                         // Change Font and Size
                         tabViewChild.typeface = Typeface.DEFAULT_BOLD
-//                    val font = ResourcesCompat.getFont(this, R.font.myFont)
-//                    tabViewChild.typeface = font
-//                    tabViewChild.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
                     }
                 }
             }

@@ -53,6 +53,7 @@ class RecipeAddIngredientsFragment : Fragment() {
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = arrayAdapter
+
         }
 
         ArrayAdapter.createFromResource(
@@ -69,7 +70,8 @@ class RecipeAddIngredientsFragment : Fragment() {
         val map = mapOf(
             "http://clipart-library.com/img/1640487.png" to "Eggs",
             "http://clipart-library.com/img/1942265.png" to "Flour",
-            "http://clipart-library.com/images_k/cup-transparent-background/cup-transparent-background-10.jpg" to "Milk"
+            "http://clipart-library.com/images_k/cup-transparent-background/cup-transparent-background-10.jpg" to "Milk",
+            "http://clipart-library.com/img/1942265.png" to "MixFlour"
         )
         return map.entries.find { it.value == ingredient }?.key
     }

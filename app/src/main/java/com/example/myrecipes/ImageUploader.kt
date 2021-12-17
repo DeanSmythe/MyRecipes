@@ -112,7 +112,6 @@ class ImageUploader : AppCompatActivity() {
     }
 
     fun displayChosenImage(currentImage: Image) {
-//        Picasso.with(this).load(currentImage.imageUrl).into(uploadImageView)
         imageNameEditText?.setText(currentImage.imageName, TextView.BufferType.EDITABLE)
         imageUrlEditText.setText(currentImage.imageUrl, TextView.BufferType.NORMAL)
         fetchImage()
