@@ -26,14 +26,7 @@ class AddRecipeTabsAdapter(fm: FragmentManager, lifecycle: Lifecycle, private va
                 ingredientsFragment.arguments = bundle
                 return ingredientsFragment
             }
-            2 -> {
-                // # Notes
-                val bundle = Bundle()
-                bundle.putString("fragmentName", "Photo")
-                val photoFragment = AddRecipeTabsFragment()
-                photoFragment.arguments = bundle
-                return photoFragment
-            }
+
             else -> return AddRecipeTabsFragment()
         }
     }

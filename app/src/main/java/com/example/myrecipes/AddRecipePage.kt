@@ -41,7 +41,7 @@ class AddRecipePage : AppCompatActivity() {
             //tab_layout.setTabTextColors(R.color.normalTabTextColor, R.color.selectedTabTextColor)
 
             // Number Of Tabs
-            val numberOfTabs = 3
+            val numberOfTabs = 2
 
             // Set Tabs in the center
             //tab_layout.tabGravity = TabLayout.GRAVITY_CENTER
@@ -74,10 +74,7 @@ class AddRecipePage : AppCompatActivity() {
                         tab.setIcon(R.drawable.ic_baseline_restaurant_menu_24)
 
                     }
-                    2 -> {
-                        tab.text = "Photo"
-                        tab.setIcon(R.drawable.ic_baseline_photo_camera_24)
-                    }
+
 
                 }
                 // Change color of the icons
