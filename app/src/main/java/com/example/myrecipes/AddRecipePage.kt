@@ -41,7 +41,7 @@ class AddRecipePage : AppCompatActivity() {
             //tab_layout.setTabTextColors(R.color.normalTabTextColor, R.color.selectedTabTextColor)
 
             // Number Of Tabs
-            val numberOfTabs = 3
+            val numberOfTabs = 2
 
             // Set Tabs in the center
             //tab_layout.tabGravity = TabLayout.GRAVITY_CENTER
@@ -74,10 +74,7 @@ class AddRecipePage : AppCompatActivity() {
                         tab.setIcon(R.drawable.ic_baseline_restaurant_menu_24)
 
                     }
-                    2 -> {
-                        tab.text = "Photo"
-                        tab.setIcon(R.drawable.ic_baseline_photo_camera_24)
-                    }
+
 
                 }
                 // Change color of the icons
@@ -90,19 +87,6 @@ class AddRecipePage : AppCompatActivity() {
 
 
             setCustomTabTitles()
-
-//        tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab) {
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab) {
-//
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab) {
-//
-//            }
-//        })
 
     }
 
@@ -121,9 +105,6 @@ class AddRecipePage : AppCompatActivity() {
 
                         // Change Font and Size
                         tabViewChild.typeface = Typeface.DEFAULT_BOLD
-//                    val font = ResourcesCompat.getFont(this, R.font.myFont)
-//                    tabViewChild.typeface = font
-//                    tabViewChild.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
                     }
                 }
             }

@@ -25,6 +25,10 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 class RecipeAddIngredientsFragment : Fragment() {
 
     private lateinit var ingredientAdapter: IngredientItemAdapter
+    private val db = Firebase.firestore
+    private val recipeList = mutableListOf<String>()
+    private lateinit var spinner: Spinner
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +40,8 @@ class RecipeAddIngredientsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ingredientAdapter = IngredientItemAdapter(mutableListOf())
+        spinner = spinnerIngredients
+        populateIngredients()
 
         populateEtViewAndUpdateDb()
 
@@ -53,6 +59,7 @@ class RecipeAddIngredientsFragment : Fragment() {
         ).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = arrayAdapter
+
         }
 
         ArrayAdapter.createFromResource(
@@ -69,7 +76,8 @@ class RecipeAddIngredientsFragment : Fragment() {
         val map = mapOf(
             "http://clipart-library.com/img/1640487.png" to "Eggs",
             "http://clipart-library.com/img/1942265.png" to "Flour",
-            "http://clipart-library.com/images_k/cup-transparent-background/cup-transparent-background-10.jpg" to "Milk"
+            "http://clipart-library.com/images_k/cup-transparent-background/cup-transparent-background-10.jpg" to "Milk",
+            "http://clipart-library.com/img/1942265.png" to "MixFlour"
         )
         return map.entries.find { it.value == ingredient }?.key
     }
@@ -118,6 +126,37 @@ class RecipeAddIngredientsFragment : Fragment() {
             etIngredientQuantity.setText("")
         }
     }
+
+    private fun populateIngredients() {
+        db.collection("ingredients").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    recipeList.add(document.data["name"].toString())
+                }
+                setSpinnerAdapter()
+            }
+            .addOnFailureListener { error ->
+                Log.w(ContentValues.TAG, "Error reading document", error)
+            }
+    }
+    private fun setSpinnerAdapter() {
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, recipeList)
+        spinner.adapter = adapter
+    }
+
+//    private fun populateUom() {
+//        db.collection("uom").get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    uomList.add(document.data["uom"].toString())
+//                }
+//                setUomAdapter()
+//            }
+//            .addOnFailureListener { error ->
+//                Log.w(ContentValues.TAG, "Error reading document", error)
+//            }
+//    }
 }
 
 

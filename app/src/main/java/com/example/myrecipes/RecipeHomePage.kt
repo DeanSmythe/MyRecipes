@@ -77,13 +77,13 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
                     for (email in items ){
                         Log.d("get ingredients?","reaching this point")
                         Log.d("get ingredients?",email.data.get("Recipe").toString())
+                        setUpAdapter(email.data.get("Picture").toString(), email.data.get("RecipeInstructions").toString(), email.data.get("Recipe").toString(), email.data.get("TimeToMake").toString())
                         val recipe = email.data.get("Recipe").toString()
                         db.collection("recipe").document(emailId).collection("MyRecipes").document(recipe).collection("Ingredients")
                             .get().addOnSuccessListener { recipes ->
                                 for (recipe in recipes){
                                     Log.d("get ingredient!?","reaching this point 2")
                                     Log.d("get ingredient!?",recipe.id.toString())
-                                    setUpAdapter(email.data.get("Picture").toString(), email.data.get("RecipeInstructions").toString(), email.data.get("Recipe").toString(), email.data.get("TimeToMake").toString())
                                 }
                             }
                     }
