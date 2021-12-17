@@ -63,10 +63,20 @@
         * Caster Sugar to serve(optional)\n
         * Toppings of your choice(Strawberries, Blueberries, Cream
     </string>
-    <string name="recipe_method">Method\n
+    <string name="recipe_method">
     STEP 1\n
     Put 100g plain flour, 2 large eggs, 300ml milk,\n
     1 tbsp sunflower or vegetable oil and a pinch of salt into a bowl or large jug,\n
     then whisk to a smooth batter.\n
+        STEP 2\n
+        Set aside for 30 mins to rest if you have time, or start cooking straight away.\n
+        Set a medium frying pan or crêpe pan over a medium heat and carefully wipe it with some oiled kitchen paper.
+STEP 4\n
+When hot, cook your pancakes for 1 min on each side until golden,\n
+        keeping them warm in a low oven as you go.\n
+STEP 5\n
+Serve with lemon wedges and caster sugar, or your favourite filling.\n
+        Once cold, you can layer the pancakes between baking parchment,\n
+        then wrap in cling film and freeze for up to 2 months.
     </string>
 </resources>
