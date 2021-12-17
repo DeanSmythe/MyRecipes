@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_recipe_home_page.xml" value="0.2375" />
         <entry key="app/src/main/res/layout/activity_register_page.xml" value="0.165" />
         <entry key="app/src/main/res/layout/db_loader.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_ingredients_method_recipe_card.xml" value="0.1621376811594203" />
         <entry key="app/src/main/res/layout/fragment_ingredients_recipe_card.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/fragment_notes_recipe_card.xml" value="0.1693840579710145" />
         <entry key="app/src/main/res/layout/image_item.xml" value="0.1" />
