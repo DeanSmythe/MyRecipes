@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_recipe_details.*
 import kotlinx.android.synthetic.main.ingredients_method.view.*
 
 class AddRecipeTabsFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

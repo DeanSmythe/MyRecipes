@@ -93,8 +93,8 @@ class IngredientAdder : AppCompatActivity() {
         when (item.itemId) {
             R.id.itmLogout -> signOut()
             R.id.itmMyCupboard -> myCupboard()
-            R.id.itmCreateRecipe -> redirectRecipePage()
-            R.id.itmAddIngredient -> redirectAddRecipePage()
+            R.id.itmCreateRecipe -> redirectAddRecipePage()
+            R.id.itmAddIngredient -> redirectRecipePage()
         }
         return super.onOptionsItemSelected(item)
     }
