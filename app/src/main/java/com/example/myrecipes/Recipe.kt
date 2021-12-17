@@ -3,9 +3,11 @@ package com.example.myrecipes
 import android.content.ContentValues
 import android.os.Parcelable
 import android.util.Log
+import com.example.myrecipes.utils.FirebaseUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import kotlinx.android.parcel.Parcelize
 
@@ -18,7 +20,7 @@ class Recipe(
     val picture: String? = null,
     val rating: Int? = null,
     val diet: String? = null
-):Parcelable {
+) : Parcelable {
     private val db = Firebase.firestore
     val recipes = mutableListOf<Recipe>()
 
@@ -47,7 +49,10 @@ class Recipe(
     }
 
     fun loadRecipes() {
-        db.collection("recipes").get()
+        val email = FirebaseUtils.firebaseAuth.currentUser?.email
+        db.collection("recipe").document(email!!).collection("MyRecipes")
+            .limit(1).orderBy("Date", Query.Direction.DESCENDING)
+            .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     recipes.add(packetiseRecipe(document))

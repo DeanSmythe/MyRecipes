@@ -12,15 +12,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 
-class ImagesAdapter constructor(
+class PhotosAdapter constructor(
     private val localRepository: LocalRepository,
-    private val imagePicker: ImagePicker
-) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     val storage = Firebase.storage
     val storageRef = storage.reference
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageImageView: ImageView = itemView.findViewById(R.id.imageImageView)
+        val photoImageView: ImageView = itemView.findViewById(R.id.photoImageView)
         val context: Context = itemView.context
     }
 
@@ -31,25 +30,24 @@ class ImagesAdapter constructor(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
-            imageImageView.setOnClickListener {
+            photoImageView.setOnClickListener {
                 localRepository.apply {
-                    saveCurrentImage(images[position])
+                    saveCurrentRecipe(recipes[position])
                 }
-                imagePicker.finishActivity()
             }
-            if (localRepository.images[position].imageUrl != null && localRepository.images[position].imageUrl != "") {
+            if (localRepository.recipes[position].picture != null && localRepository.recipes[position].name != "") {
 
-                localRepository.images[position].imageUrl?.let { url ->
+                localRepository.recipes[position].picture?.let { url ->
                     storageRef.child(url).downloadUrl.addOnSuccessListener {
-                        Picasso.with(context).load(it).into(imageImageView)
+                        Picasso.with(context).load(it).into(photoImageView)
                     }.addOnFailureListener {
                         Log.i("ImageDownloader:", "unable to get Image")
                     }
                 }
             }
-       }
+        }
     }
 
-    override fun getItemCount() = localRepository.images.size
+    override fun getItemCount() = localRepository.recipes.size
 
 }

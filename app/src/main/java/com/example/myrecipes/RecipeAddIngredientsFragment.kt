@@ -92,7 +92,8 @@ class RecipeAddIngredientsFragment : Fragment() {
     private fun populateEtWithRecipeNames() {
         val email = FirebaseUtils.firebaseAuth.currentUser?.email
         var db = Firebase.firestore
-        val dbGetUser = db.collection("recipe").document(email!!).collection("MyRecipes").limit(1).orderBy("Date",Query.Direction.DESCENDING)
+        db.collection("recipe").document(email!!).collection("MyRecipes")
+            .limit(1).orderBy("Date",Query.Direction.DESCENDING)
            .get().addOnSuccessListener { documents ->
             for (document in documents) {
                 var recipeNames = document.data.get("Recipe").toString()

@@ -10,7 +10,7 @@ data class LocalRepository constructor(
     var images: MutableList<Image> = mutableListOf(),
     val user: String = "",
     var currentImage: Image? = null,
-    val recipes: MutableList<Recipe> = mutableListOf(),
+    var recipes: MutableList<Recipe> = mutableListOf(),
     var currentRecipe: Recipe? = null,
     val ingredients: MutableList<Ingredient> = mutableListOf(),
     var currentIngredient: Ingredient? = null
