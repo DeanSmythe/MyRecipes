@@ -22,11 +22,13 @@ data class Ingredient(
         picture: String,
         recipeName: String? = null
     ) {
-        val ingredient = Ingredient(name, description, uom, picture)
-        writeNewIngredient(ingredient)
-    }
-
-    fun writeNewIngredient(ingredient: Ingredient) {
+        val ingredient = hashMapOf(
+            "name" to name,
+            "description" to description,
+            "uom" to uom,
+            "picture" to picture,
+            "recipeName" to recipeName
+        )
         db.collection("ingredients").add(ingredient)
             .addOnSuccessListener { documentReference ->
                 Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
