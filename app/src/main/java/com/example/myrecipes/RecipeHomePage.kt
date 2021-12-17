@@ -1,33 +1,25 @@
 package com.example.myrecipes
 
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myrecipes.utils.FirebaseUtils
 import com.example.myrecipes.utils.FirebaseUtils.firebaseAuth
-import com.example.myrecipes.utils.RecipeAdapter
 import com.example.myrecipes.utils.RecipeAdapterSingle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recipe_add_ingredients.*
-import java.lang.Exception
 
 class RecipeHomePage : AppCompatActivity(), CellClickListener {
 
+    var db = Firebase.firestore
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var adapter : RecipeAdapterSingle
     private val img = arrayOf(R.drawable.burger,R.drawable.pizza,R.drawable.pancakes,
@@ -52,28 +44,12 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
 
     }
 
-//    private fun getRecipes() {
-//        var db = Firebase.firestore
-//        val dbGetUser = db.collection("recipes").get().addOnSuccessListener { emails ->
-//            for (email in emails ){
-//                Log.d("All Recipes?",email.id.toString())
-//                val users = db.collection("recipes").document(email.id).collection("Ingredients").get().addOnSuccessListener { items ->
-//                    for (email in items ){
-//                        Log.d("get ingredients?","reaching this point")
-//                        Log.d("get ingredients?",email.data.get("Ingredient").toString())
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     private fun getRecipes() {
-        var db = Firebase.firestore
-        val dbGetUser = db.collection("email").get().addOnSuccessListener { emails ->
+        db.collection("email").get().addOnSuccessListener { emails ->
             for (email in emails ){
                 Log.d("All Recipes?",email.id.toString())
                 val emailId = email.id
-                val users = db.collection("recipe").document(email.id).collection("MyRecipes").get().addOnSuccessListener { items ->
+                db.collection("recipe").document(email.id).collection("MyRecipes").get().addOnSuccessListener { items ->
                     for (email in items ){
                         Log.d("get ingredients?","reaching this point")
                         Log.d("get ingredients?",email.data.get("Recipe").toString())
@@ -94,7 +70,7 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.account_menu,menu)
-        var currentUser = menu?.findItem(R.id.itmLoggedInAs)
+        val currentUser = menu?.findItem(R.id.itmLoggedInAs)
         currentUser?.setTitle(setUsername())
         return super.onCreateOptionsMenu(menu)
     }
@@ -120,7 +96,6 @@ class RecipeHomePage : AppCompatActivity(), CellClickListener {
         val user = firebaseAuth.currentUser?.email
         if (user != null) {
             Log.d("tag", user)
-            val username = user
             return "Signed in as: "+user
         }
         return "Error finding user"
