@@ -1,19 +1,22 @@
 package com.example.myrecipes
 
 import android.content.ContentValues
+import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.parcel.Parcelize
 
 @IgnoreExtraProperties
+@Parcelize
 data class Ingredient(
     val name: String? = null,
     val description: String? = null,
     val uom: String? = null,
     val picture: String? = null,
     val recipeName: String? = null
-) {
+):Parcelable {
     val db = Firebase.firestore
     fun writeNewIngredient(
         name: String,
